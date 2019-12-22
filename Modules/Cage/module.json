@@ -1,0 +1,13 @@
+{
+    "name": "Cage",
+    "alias": "cage",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Cage\\Providers\\CageServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

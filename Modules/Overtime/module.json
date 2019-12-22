@@ -1,0 +1,13 @@
+{
+    "name": "Overtime",
+    "alias": "overtime",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Overtime\\Providers\\OvertimeServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

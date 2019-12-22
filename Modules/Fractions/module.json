@@ -1,0 +1,13 @@
+{
+    "name": "Fractions",
+    "alias": "fractions",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Fractions\\Providers\\FractionsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

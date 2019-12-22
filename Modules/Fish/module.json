@@ -1,0 +1,13 @@
+{
+    "name": "Fish",
+    "alias": "fish",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Fish\\Providers\\FishServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

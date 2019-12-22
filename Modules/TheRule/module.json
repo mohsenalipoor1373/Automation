@@ -1,0 +1,13 @@
+{
+    "name": "TheRule",
+    "alias": "therule",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\TheRule\\Providers\\TheRuleServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
