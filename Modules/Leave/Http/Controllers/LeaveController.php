@@ -25,22 +25,6 @@ class LeaveController extends Controller
 
     public function index(Request $request)
     {
-//        if ($request->ajax()) {
-//            $data = User::orderBy('id', 'desc')->get();
-//            return DataTables::of($data)
-//                ->addIndexColumn()
-//                ->addColumn('role', function ($row) {
-//                    foreach ($row->getRoleNames() as $name) {
-//                        return $role = "<label class=\"btn btn-success\">{$name}</a>";
-//                    }
-//                })
-//                ->addColumn('action', function ($row) {
-//                    $btn = '<a href="' . route('admin.module.leave.wizard', $row->id) . '" class="edit btn btn-info btn-sm">درخواست مرخصی</a>';
-//                    return $btn;
-//                })
-//                ->rawColumns(['action', 'role'])
-//                ->make(true);
-//        }
         $users = User::get();
         return view('leave::index', compact('users'));
     }
@@ -75,9 +59,7 @@ class LeaveController extends Controller
         ]);
 
 
-        $querys = Leave::where('user_id', $request['id'])->where('Supervisor', null)
-            ->orwhere('Supervisor', 1)
-            ->whereNull('Admin')
+        $querys = Leave::where('user_id', $request['id'])->whereNull('Admin')
             ->get();
         foreach ($querys as $query)
             if ($query) {
@@ -115,114 +97,34 @@ class LeaveController extends Controller
         $input['from'] = $from;
         $input['todate'] = $todate;
         $leave = Leave::create($input);
-        if ($leave->Priority == 1) {
-            $leave->update([
-                'Supervisor' => 3,
-            ]);
-            $user = User::where('id', $leave->user_id)->first();
-            \Modules\Leave\Jobs\SendSmsJob::dispatch($leave, $user);
+        if ($leave) {
+            if ($leave->Priority == 1) {
+                $leave->update([
+                    'Supervisor' => 3,
+                ]);
+                $user = User::where('id', $leave->user_id)->first();
+                \Modules\Leave\Jobs\SendSmsJob::dispatch($leave, $user);
+            }
+
+            return ReturnMsgSuccess('درخواست مرخصی با موفقیت ارسال شد');
         }
 
-        return ReturnMsgSuccess('درخواست مرخصی با موفقیت ارسال شد');
     }
 
     public function show(Request $request)
     {
 
-//        if ($request->ajax()) {
-//            $data = Leave::whereNull('Archive')->orderBy('id', 'desc')->get();
-//            return DataTables::of($data)
-//                ->addIndexColumn()
-//                ->addColumn('name', function ($row) {
-//                    return optional($row->user)->name;
-//                })->addColumn('personnel_id', function ($row) {
-//                    return optional($row->user)->personnel_id;
-//                })->addColumn('role', function ($row) {
-//                    $users = $row->user->id;
-//                    $q = DB::table('model_has_roles')
-//                        ->where('model_id', $users)
-//                        ->pluck('role_id');
-//                    $querys = Role::where('id', $q)->pluck('name');
-//                    foreach ($querys as $query)
-//                        return $role = "<label class=\"btn btn-success\">{$query}</label>";
-//                })
-//                ->addColumn('Type', function ($row) {
-//                    return "<label class=\"btn btn-danger\">{$row->Type}</label>";
-//
-//                })
-//                ->addColumn('history', function ($row) {
-//                    if ($row->history == null) {
-//                        return "";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->history}</label>";
-//
-//                })
-//                ->addColumn('from', function ($row) {
-//                    if ($row->from == null) {
-//                        return "<label class=\"btn btn-info\">{$row->FromHour}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->from}</label>";
-//
-//                })
-//                ->addColumn('todate', function ($row) {
-//                    if ($row->todate == null) {
-//                        return "<label class=\"btn btn-info\">{$row->until}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->todate}</label>";
-//
-//                })
-//                ->addColumn('created_at', function ($row) {
-//                    $created_at = Jalalian::forge($row->created_at)->ago();
-//                    return $created_at;
-//
-//                })
-//                ->addColumn('Supervisor', function ($row) {
-//                    if (empty($row->Supervisor)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Supervisor == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Supervisor == 3) {
-//                        return $role = "<label class=\"btn btn-primary\">اولویت ضروری</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('Admin', function ($row) {
-//                    if (empty($row->Admin)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Admin == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Admin == 2) {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده توسط سرپرست</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('action', function ($row) {
-//                    if ($row->Supervisor == null) {
-//                        $btn = '<a href="' . route('admin.module.leave.edit', $row->id) . '" class="edit btn btn-primary btn-sm">ویرایش</a>';
-//                        $btn .= '<a href="' . route('admin.module.leave.delete', $row->id) . '" class="edit btn btn-danger btn-sm">حذف</a>';
-//                        return $btn;
-//                    }
-//                    return "<label class=\"btn btn-info\">دسترسی به این درخواست ندارید</label>";
-//
-//                })
-//                ->rawColumns(['action', 'role', 'Type', 'Supervisor', 'Admin', 'history', 'from', 'todate'])
-//                ->make(true);
-//        }
         $Leaves = Leave::whereNull('Archive')->orderBy('id', 'desc')->get();
         return view('leave::show', compact('Leaves'));
     }
 
     public function delete(Leave $id)
     {
-        $id->delete();
-        return ReturnMsgError('اطلاعات مرخصی با موفقیت حذف شد');
+        $delete = $id->delete();
+        if ($delete) {
+            return ReturnMsgError('اطلاعات مرخصی با موفقیت حذف شد');
+
+        }
 
     }
 
@@ -251,7 +153,7 @@ class LeaveController extends Controller
         }
 
         $leave = Leave::where('id', $request['id'])->first();
-        $leave->update([
+        $update = $leave->update([
             'Type' => $type,
             'history' => $history,
             'from' => $from,
@@ -261,7 +163,10 @@ class LeaveController extends Controller
             'Priority' => $request['Priority'],
             'description' => $request['description'],
         ]);
-        return ReturnMsgSuccess('درخواست مرخصی با موفقیت ویرایش شد');
+        if ($update) {
+            return ReturnMsgSuccess('درخواست مرخصی با موفقیت ویرایش شد');
+
+        }
 
 
     }
@@ -269,75 +174,6 @@ class LeaveController extends Controller
     public function showleave(Request $request)
     {
 
-//        if ($request->ajax()) {
-//            $data = Leave::where('Supervisor', null)->orderBy('id', 'desc')->get();
-//            return DataTables::of($data)
-//                ->addIndexColumn()
-//                ->addColumn('name', function ($row) {
-//                    return optional($row->user)->name;
-//                })->addColumn('personnel_id', function ($row) {
-//                    return optional($row->user)->personnel_id;
-//                })->addColumn('role', function ($row) {
-//                    $users = $row->user->id;
-//                    $q = DB::table('model_has_roles')
-//                        ->where('model_id', $users)
-//                        ->pluck('role_id');
-//                    $querys = Role::where('id', $q)->pluck('name');
-//                    foreach ($querys as $query)
-//                        return $role = "<label class=\"btn btn-success\">{$query}</label>";
-//                })
-//                ->addColumn('Type', function ($row) {
-//                    return "<label class=\"btn btn-danger\">{$row->Type}</label>";
-//
-//                })
-//                ->addColumn('history', function ($row) {
-//                    if ($row->history == null) {
-//                        return "";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->history}</label>";
-//
-//                })
-//                ->addColumn('from', function ($row) {
-//                    if ($row->from == null) {
-//                        return "<label class=\"btn btn-info\">{$row->FromHour}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->from}</label>";
-//
-//                })
-//                ->addColumn('todate', function ($row) {
-//                    if ($row->todate == null) {
-//                        return "<label class=\"btn btn-info\">{$row->until}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->todate}</label>";
-//
-//                })
-//                ->addColumn('description', function ($row) {
-//                    if (empty($row->description)) {
-//                        return "<label class=\"btn btn-info\">توضیحات ثبت نشده است</label>";
-//                    } else {
-//                        $description = $row->description;
-//                        $descriptiond = str_limit($row->description, 20);
-//                        return "<label title='{$description}' class=\"btn btn-info\">{$descriptiond}</label>";
-//                    }
-//
-//                })
-//                ->addColumn('created_at', function ($row) {
-//                    $created_at = Jalalian::forge($row->created_at)->ago();
-//                    return $created_at;
-//
-//                })
-//                ->addColumn('action', function ($row) {
-//                    $btn = '<a href="' . route('admin.module.leave.supervisor.true', $row->id) . '" class="edit btn btn-success btn-sm">تایید درخواست</a>';
-//                    $btn .= '<a href="' . route('admin.module.leave.supervisor.false', $row->id) . '" class="edit btn btn-danger btn-sm">رد کردن درخواست</a>';
-//                    $btn .= '<a href="' . route('admin.module.leave.supervisor.list', $row->id) . '" class="edit btn btn-info btn-sm">مشاهده جزییات</a>';
-//                    return $btn;
-//                })
-//                ->rawColumns(['action', 'role', 'Type', 'history', 'from', 'todate', 'description'])
-//                ->make(true);
-//        }
         $Leaves = Leave::where('Supervisor', null)->orderBy('id', 'desc')->get();
 
         return view('leave::showleave', compact('Leaves'));
@@ -346,105 +182,6 @@ class LeaveController extends Controller
     public function showadmin(Request $request)
     {
 
-//        if ($request->ajax()) {
-//            $data = Leave::whereNull('Admin')->where('Supervisor', 1)
-//                ->orwhere('Supervisor', 3)->whereNull('Admin')->orderBy('id', 'desc')->get();
-//            return DataTables::of($data)
-//                ->addIndexColumn()
-//                ->addColumn('name', function ($row) {
-//                    return optional($row->user)->name;
-//                })->addColumn('personnel_id', function ($row) {
-//                    return optional($row->user)->personnel_id;
-//                })->addColumn('role', function ($row) {
-//                    $users = $row->user->id;
-//                    $q = DB::table('model_has_roles')
-//                        ->where('model_id', $users)
-//                        ->pluck('role_id');
-//                    $querys = Role::where('id', $q)->pluck('name');
-//                    foreach ($querys as $query)
-//                        return $role = "<label class=\"btn btn-success\">{$query}</label>";
-//                })
-//                ->addColumn('Type', function ($row) {
-//                    return "<label class=\"btn btn-danger\">{$row->Type}</label>";
-//
-//                })
-//                ->addColumn('history', function ($row) {
-//                    if ($row->history == null) {
-//                        return "";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->history}</label>";
-//
-//                })
-//                ->addColumn('from', function ($row) {
-//                    if ($row->from == null) {
-//                        return "<label class=\"btn btn-info\">{$row->FromHour}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->from}</label>";
-//
-//                })
-//                ->addColumn('todate', function ($row) {
-//                    if ($row->todate == null) {
-//                        return "<label class=\"btn btn-info\">{$row->until}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->todate}</label>";
-//
-//                })
-//                ->addColumn('description', function ($row) {
-//                    if (empty($row->description)) {
-//                        return "<label class=\"btn btn-info\">توضیحات ثبت نشده است</label>";
-//                    } else {
-//                        $description = $row->description;
-//                        $descriptiond = str_limit($row->description, 20);
-//                        return "<label title='{$description}' class=\"btn btn-info\">{$descriptiond}</label>";
-//                    }
-//
-//                })
-//                ->addColumn('created_at', function ($row) {
-//                    $created_at = Jalalian::forge($row->created_at)->ago();
-//                    return $created_at;
-//
-//                })
-//                ->addColumn('Supervisor', function ($row) {
-//                    if (empty($row->Supervisor)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Supervisor == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Supervisor == 3) {
-//                        return $role = "<label class=\"btn btn-primary\">اولویت ضروری</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('Admin', function ($row) {
-//                    if (empty($row->Admin)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Admin == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Admin == 2) {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده توسط سرپرست</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('created_at', function ($row) {
-//                    $created_at = Jalalian::forge($row->created_at)->ago();
-//                    return $created_at;
-//
-//                })
-//                ->addColumn('action', function ($row) {
-//                    $btn = '<a href="' . route('admin.module.leave.admin.true', $row->id) . '" class="edit btn btn-success btn-sm">تایید درخواست</a>';
-//                    $btn .= '<a href="' . route('admin.module.leave.admin.false', $row->id) . '" class="edit btn btn-danger btn-sm">رد کردن درخواست</a>';
-//                    $btn .= '<a href="' . route('admin.module.leave.supervisor.list', $row->id) . '" class="edit btn btn-info btn-sm">مشاهده جزییات</a>';
-//                    return $btn;
-//                })
-//                ->rawColumns(['action', 'role', 'Type', 'history', 'from', 'todate', 'Supervisor', 'Admin', 'description'])
-//                ->make(true);
-//        }
         $Leaves = Leave::whereNull('Admin')->where('Supervisor', 1)
             ->orwhere('Supervisor', 3)->whereNull('Admin')->orderBy('id', 'desc')->get();
 
@@ -455,141 +192,65 @@ class LeaveController extends Controller
     {
         $ids = Leave::where('id', $id->id)->get();
         foreach ($ids as $ide)
-            $ide->update([
+            $update = $ide->update([
                 'Supervisor' => 1,
             ]);
-        return ReturnMsgSuccess('با درخواست مرخصی پرسنل موافقت شد و برای تایید نهایی به مدیریت ارسال شد');
+        if ($update) {
+            return ReturnMsgSuccess('با درخواست مرخصی پرسنل موافقت شد و برای تایید نهایی به مدیریت ارسال شد');
+
+        }
     }
 
     public function supervisorFalse(Leave $id)
     {
         $ids = Leave::where('id', $id->id)->get();
         foreach ($ids as $ide)
-            $ide->update([
+            $update = $ide->update([
                 'Supervisor' => 2,
                 'Admin' => 2,
             ]);
-        $user = User::where('id', $ide->user_id)->first();
-        \Modules\Leave\Jobs\SendSmsErrorJob::dispatch($ide, $user);
-        return ReturnMsgError('با درخواست مرخصی پرسنل موافقت نشد نتیجه برای پرسنل پیامک میشود');
+        if ($update) {
+            $user = User::where('id', $ide->user_id)->first();
+            \Modules\Leave\Jobs\SendSmsErrorJob::dispatch($ide, $user);
+            return ReturnMsgError('با درخواست مرخصی پرسنل موافقت نشد نتیجه برای پرسنل پیامک میشود');
+        }
+
     }
 
     public function adminTrue(Leave $id)
     {
         $ids = Leave::where('id', $id->id)->get();
         foreach ($ids as $ide)
-            $ide->update([
+            $update = $ide->update([
                 'Admin' => 1,
             ]);
-        $user = User::where('id', $ide->user_id)->first();
-        \Modules\Leave\Jobs\SendSmsSuccessJob::dispatch($ide, $user);
+        if ($update) {
+            $user = User::where('id', $ide->user_id)->first();
+            \Modules\Leave\Jobs\SendSmsSuccessJob::dispatch($ide, $user);
 
-        return ReturnMsgSuccess('با درخواست مرخصی پرسنل موافقت شد نتیجه برای پرسنل پیامک میشود.');
+            return ReturnMsgSuccess('با درخواست مرخصی پرسنل موافقت شد نتیجه برای پرسنل پیامک میشود.');
+        }
+
     }
 
     public function adminFalse(Leave $id)
     {
         $ids = Leave::where('id', $id->id)->get();
         foreach ($ids as $ide)
-            $ide->update([
+            $update = $ide->update([
                 'Admin' => 3,
             ]);
-        $user = User::where('id', $ide->user_id)->first();
-        \Modules\Leave\Jobs\SendSmsErrorJob::dispatch($ide, $user);
-        return ReturnMsgError('با درخواست مرخصی پرسنل موافقت نشد نتیجه برای پرسنل پیامک میشود.');
+        if ($update) {
+            $user = User::where('id', $ide->user_id)->first();
+            \Modules\Leave\Jobs\SendSmsErrorJob::dispatch($ide, $user);
+            return ReturnMsgError('با درخواست مرخصی پرسنل موافقت نشد نتیجه برای پرسنل پیامک میشود.');
+        }
+
     }
 
     public function makeleave(Request $request)
     {
 
-//        if ($request->ajax()) {
-//            $data = Leave::where('Supervisor', 1)->orwhere('Supervisor', 2)->orderBy('id', 'desc')->get();
-//
-//            return DataTables::of($data)
-//                ->addIndexColumn()
-//                ->addColumn('name', function ($row) {
-//                    return optional($row->user)->name;
-//                })->addColumn('personnel_id', function ($row) {
-//                    return optional($row->user)->personnel_id;
-//                })->addColumn('role', function ($row) {
-//                    $users = $row->user->id;
-//                    $q = DB::table('model_has_roles')
-//                        ->where('model_id', $users)
-//                        ->pluck('role_id');
-//                    $querys = Role::where('id', $q)->pluck('name');
-//                    foreach ($querys as $query)
-//                        return $role = "<label class=\"btn btn-success\">{$query}</label>";
-//                })
-//                ->addColumn('Type', function ($row) {
-//                    return "<label class=\"btn btn-danger\">{$row->Type}</label>";
-//
-//                })
-//                ->addColumn('history', function ($row) {
-//                    if ($row->history == null) {
-//                        return "";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->history}</label>";
-//
-//                })
-//                ->addColumn('from', function ($row) {
-//                    if ($row->from == null) {
-//                        return "<label class=\"btn btn-info\">{$row->FromHour}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->from}</label>";
-//
-//                })
-//                ->addColumn('todate', function ($row) {
-//                    if ($row->todate == null) {
-//                        return "<label class=\"btn btn-info\">{$row->until}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->todate}</label>";
-//
-//                })
-//                ->addColumn('description', function ($row) {
-//                    if (empty($row->description)) {
-//                        return "<label class=\"btn btn-info\">توضیحات ثبت نشده است</label>";
-//                    } else {
-//                        $description = $row->description;
-//                        $descriptiond = str_limit($row->description, 20);
-//                        return "<label title='{$description}' class=\"btn btn-info\">{$descriptiond}</label>";
-//                    }
-//
-//                })
-//                ->addColumn('created_at', function ($row) {
-//                    $created_at = Jalalian::forge($row->created_at)->ago();
-//                    return $created_at;
-//
-//                })
-//                ->addColumn('Supervisor', function ($row) {
-//                    if (empty($row->Supervisor)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Supervisor == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Supervisor == 3) {
-//                        return $role = "<label class=\"btn btn-primary\">اولویت ضروری</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('Admin', function ($row) {
-//                    if (empty($row->Admin)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Admin == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Admin == 2) {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده توسط سرپرست</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->rawColumns(['role', 'Type', 'history', 'from', 'todate', 'Supervisor', 'Admin', 'description'])
-//                ->make(true);
-//        }
         $Leaves = Leave::where('Supervisor', 1)->orwhere('Supervisor', 2)->orderBy('id', 'desc')->get();
 
         return view('leave::makeleave', compact('Leaves'));
@@ -598,105 +259,6 @@ class LeaveController extends Controller
     public function makeadmin(Request $request)
     {
 
-//        if ($request->ajax()) {
-//            $data = Leave::where('Admin', 1)->orwhere('Admin', 3)->orderBy('id', 'desc')->get();
-//
-//            return DataTables::of($data)
-//                ->addIndexColumn()
-//                ->addColumn('name', function ($row) {
-//                    return optional($row->user)->name;
-//                })->addColumn('personnel_id', function ($row) {
-//                    return optional($row->user)->personnel_id;
-//                })->addColumn('role', function ($row) {
-//                    $users = $row->user->id;
-//                    $q = DB::table('model_has_roles')
-//                        ->where('model_id', $users)
-//                        ->pluck('role_id');
-//                    $querys = Role::where('id', $q)->pluck('name');
-//                    foreach ($querys as $query)
-//                        return $role = "<label class=\"btn btn-success\">{$query}</label>";
-//                })
-//                ->addColumn('Type', function ($row) {
-//                    return "<label class=\"btn btn-danger\">{$row->Type}</label>";
-//
-//                })
-//                ->addColumn('history', function ($row) {
-//                    if ($row->history == null) {
-//                        return "";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->history}</label>";
-//
-//                })
-//                ->addColumn('from', function ($row) {
-//                    if ($row->from == null) {
-//                        return "<label class=\"btn btn-info\">{$row->FromHour}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->from}</label>";
-//
-//                })
-//                ->addColumn('todate', function ($row) {
-//                    if ($row->todate == null) {
-//                        return "<label class=\"btn btn-info\">{$row->until}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->todate}</label>";
-//
-//                })
-//                ->addColumn('description', function ($row) {
-//                    if (empty($row->description)) {
-//                        return "<label class=\"btn btn-info\">توضیحات ثبت نشده است</label>";
-//                    } else {
-//                        $description = $row->description;
-//                        $descriptiond = str_limit($row->description, 20);
-//                        return "<label title='{$description}' class=\"btn btn-info\">{$descriptiond}</label>";
-//                    }
-//
-//                })
-//                ->addColumn('created_at', function ($row) {
-//                    $created_at = Jalalian::forge($row->created_at)->ago();
-//                    return $created_at;
-//
-//                })
-//                ->addColumn('Supervisor', function ($row) {
-//                    if (empty($row->Supervisor)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Supervisor == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Supervisor == 3) {
-//                        return $role = "<label class=\"btn btn-primary\">اولویت ضروری</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('Admin', function ($row) {
-//                    if (empty($row->Admin)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Admin == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Admin == 2) {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده توسط سرپرست</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('created_at', function ($row) {
-//                    $created_at = Jalalian::forge($row->created_at)->ago();
-//                    return $created_at;
-//
-//                })
-//                ->addColumn('action', function ($row) {
-//                    $btn = '<a href="' . route('admin.module.leave.admin.true', $row->id) . '" class="edit btn btn-success btn-sm">تایید درخواست</a>';
-//                    $btn .= '<a href="' . route('admin.module.leave.admin.false', $row->id) . '" class="edit btn btn-danger btn-sm">رد کردن درخواست</a>';
-//                    $btn .= '<a href="' . route('admin.module.leave.supervisor.list', $row->id) . '" class="edit btn btn-info btn-sm">مشاهده جزییات</a>';
-//                    return $btn;
-//                })
-//                ->rawColumns(['action', 'role', 'Type', 'history', 'from', 'todate', 'Supervisor', 'Admin', 'description'])
-//                ->make(true);
-//        }
         $Leaves = Leave::where('Admin', 1)->orwhere('Admin', 3)->orderBy('id', 'desc')->get();
 
         return view('leave::makeadmin', compact('Leaves'));
@@ -719,10 +281,13 @@ class LeaveController extends Controller
 
         $checks = Leave::whereNotNull('Admin')->where('Archive', null)->get();
         foreach ($checks as $check)
-            Leave::where('id', $check->id)->update([
+            $update = Leave::where('id', $check->id)->update([
                 'Archive' => 1,
             ]);
-        return ReturnMsgSuccess('درخواست ها بایگانی شدند');
+        if ($update) {
+            return ReturnMsgSuccess('درخواست ها بایگانی شدند');
+
+        }
 
 
     }
@@ -730,97 +295,6 @@ class LeaveController extends Controller
     public function make(Request $request)
     {
 
-//        if ($request->ajax()) {
-//            $data = Leave::whereNotNull('Archive')->orderBy('id', 'desc')->get();
-//            return DataTables::of($data)
-//                ->addIndexColumn()
-//                ->addColumn('name', function ($row) {
-//                    return optional($row->user)->name;
-//                })->addColumn('personnel_id', function ($row) {
-//                    return optional($row->user)->personnel_id;
-//                })->addColumn('role', function ($row) {
-//                    $users = $row->user->id;
-//                    $q = DB::table('model_has_roles')
-//                        ->where('model_id', $users)
-//                        ->pluck('role_id');
-//                    $querys = Role::where('id', $q)->pluck('name');
-//                    foreach ($querys as $query)
-//                        return $role = "<label class=\"btn btn-success\">{$query}</label>";
-//                })
-//                ->addColumn('Type', function ($row) {
-//                    return "<label class=\"btn btn-danger\">{$row->Type}</label>";
-//
-//                })
-//                ->addColumn('history', function ($row) {
-//                    if ($row->history == null) {
-//                        return "";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->history}</label>";
-//
-//                })
-//                ->addColumn('from', function ($row) {
-//                    if ($row->from == null) {
-//                        return "<label class=\"btn btn-info\">{$row->FromHour}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->from}</label>";
-//
-//                })
-//                ->addColumn('todate', function ($row) {
-//                    if ($row->todate == null) {
-//                        return "<label class=\"btn btn-info\">{$row->until}</label>";
-//
-//                    } else
-//                        return "<label class=\"btn btn-info\">{$row->todate}</label>";
-//
-//                })
-//                ->addColumn('description', function ($row) {
-//                    if (empty($row->description)) {
-//                        return "<label class=\"btn btn-info\">توضیحات ثبت نشده است</label>";
-//                    } else {
-//                        $description = $row->description;
-//                        $descriptiond = str_limit($row->description, 20);
-//                        return "<label title='{$description}' class=\"btn btn-info\">{$descriptiond}</label>";
-//                    }
-//
-//                })
-//                ->addColumn('created_at', function ($row) {
-//                    $created_at = Jalalian::forge($row->created_at)->ago();
-//                    return $created_at;
-//
-//                })
-//                ->addColumn('Supervisor', function ($row) {
-//                    if (empty($row->Supervisor)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Supervisor == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Supervisor == 3) {
-//                        return $role = "<label class=\"btn btn-primary\">اولویت ضروری</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('Admin', function ($row) {
-//                    if (empty($row->Admin)) {
-//                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-//                    } elseif ($row->Admin == 1) {
-//                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-//                    } elseif ($row->Admin == 2) {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده توسط سرپرست</label>";
-//                    } else {
-//                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-//                    }
-//
-//                })
-//                ->addColumn('action', function ($row) {
-//                    $btn = '<a href="' . route('admin.module.leave.supervisor.list', $row->id) . '" class="edit btn btn-info btn-sm">مشاهده جزییات</a>';
-//                    return $btn;
-//                })
-//                ->rawColumns(['action', 'role', 'Type', 'history', 'from', 'todate', 'Supervisor', 'Admin', 'description'])
-//                ->make(true);
-//        }
         $Leaves = Leave::whereNotNull('Archive')->orderBy('id', 'desc')->get();
         return view('leave::make', compact('Leaves'));
     }

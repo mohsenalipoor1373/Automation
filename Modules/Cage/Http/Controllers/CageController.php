@@ -29,157 +29,16 @@ class CageController extends Controller
 
     public function list(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Cage::whereNull('buy')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('name', function ($row) {
-                    return $row->name;
-                })
-                ->addColumn('number', function ($row) {
-                    return $row->number;
-                })
-                ->addColumn('diameter', function ($row) {
-                    return $row->diameter;
-                })
-                ->addColumn('height', function ($row) {
-                    return $row->height;
-                })
-                ->addColumn('yarn', function ($row) {
-                    return $row->yarn;
-                })
-                ->addColumn('verticalrope', function ($row) {
-                    return $row->verticalrope;
-                })
-                ->addColumn('horizontalrope', function ($row) {
-                    return $row->horizontalrope;
-                })
-                ->addColumn('floorrope', function ($row) {
-                    return $row->floorrope;
-                })
-                ->addColumn('connectingrope', function ($row) {
-                    return $row->connectingrope;
-                })
-                ->addColumn('double', function ($row) {
-                    return $row->double;
-                })
-                ->addColumn('description', function ($row) {
-                    return $row->description;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = Jalalian::forge($row->created_at)->ago();
-                    return $created_at;
-
-                })
-                ->addColumn('date', function ($row) {
-                    return $row->date;
-                })
-                ->addColumn('buy', function ($row) {
-                    if (empty($row->buy)) {
-                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-                    } elseif ($row->buy == 1) {
-                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-                    } elseif ($row->buy == 3) {
-                        return $role = "<label class=\"btn btn-primary\">اولویت ضروری</label>";
-                    } else {
-                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-                    }
-
-                })
-                ->addColumn('action', function ($row) {
-
-                    $btn = '<a href="' . route('admin.module.buy.admin.success', $row->id) . '" class="edit btn btn-success btn-sm">تایید درخواست</a>';
-                    $btn .= '<a href="' . route('admin.module.buy.admin.error', $row->id) . '" class="edit btn btn-danger btn-sm">رد کردن درخواست</a>';
-                    $btn .= '<a href="' . route('admin.module.leave.delete', $row->id) . '" class="edit btn btn-info btn-sm">اعلام تاریخ</a>';
-                    return $btn;
-
-                })
-                ->rawColumns(['name', 'buy', 'action'
-                    , 'number', 'diameter', 'height', 'yarn', 'verticalrope', 'horizontalrope', 'floorrope'
-                    , 'connectingrope', 'double', 'description', 'date'
-                ])
-                ->make(true);
-        }
-
-        return view('cage::list');
+        $Cages = Cage::whereNull('Archive')->get();
+        return view('cage::list', compact('Cages'));
 
     }
 
     public function showadmin(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Cage::whereNull('buy')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('name', function ($row) {
-                    return $row->name;
-                })
-                ->addColumn('number', function ($row) {
-                    return $row->number;
-                })
-                ->addColumn('diameter', function ($row) {
-                    return $row->diameter;
-                })
-                ->addColumn('height', function ($row) {
-                    return $row->height;
-                })
-                ->addColumn('yarn', function ($row) {
-                    return $row->yarn;
-                })
-                ->addColumn('verticalrope', function ($row) {
-                    return $row->verticalrope;
-                })
-                ->addColumn('horizontalrope', function ($row) {
-                    return $row->horizontalrope;
-                })
-                ->addColumn('floorrope', function ($row) {
-                    return $row->floorrope;
-                })
-                ->addColumn('connectingrope', function ($row) {
-                    return $row->connectingrope;
-                })
-                ->addColumn('double', function ($row) {
-                    return $row->double;
-                })
-                ->addColumn('description', function ($row) {
-                    return $row->description;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = Jalalian::forge($row->created_at)->ago();
-                    return $created_at;
+        $Cages = Cage::whereNull('buy')->get();
 
-                })
-                ->addColumn('date', function ($row) {
-                    return $row->date;
-                })
-                ->addColumn('buy', function ($row) {
-                    if (empty($row->buy)) {
-                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-                    } elseif ($row->buy == 1) {
-                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-                    } elseif ($row->buy == 3) {
-                        return $role = "<label class=\"btn btn-primary\">اولویت ضروری</label>";
-                    } else {
-                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-                    }
-
-                })
-                ->addColumn('action', function ($row) {
-
-                    $btn = '<a href="' . route('admin.module.cage.admin.date', $row->id) . '" class="edit btn btn-info btn-sm">ثبت تاریخ</a>';
-                    $btn .= '<a href="' . route('admin.module.cage.admin.success', $row->id) . '" class="edit btn btn-success btn-sm">تایید درخواست</a>';
-                    $btn .= '<a href="' . route('admin.module.cage.admin.error', $row->id) . '" class="edit btn btn-danger btn-sm">رد کردن درخواست</a>';
-                    return $btn;
-
-                })
-                ->rawColumns(['name', 'buy', 'action'
-                    , 'number', 'diameter', 'height', 'yarn', 'verticalrope', 'horizontalrope', 'floorrope'
-                    , 'connectingrope', 'double', 'description', 'date'
-                ])
-                ->make(true);
-        }
-
-        return view('cage::showadmin');
+        return view('cage::showadmin', compact('Cages'));
 
     }
 
@@ -209,6 +68,7 @@ class CageController extends Controller
         return ReturnMsgSuccess('با درخواست تولید موافقت شد');
 
     }
+
     public function error(Cage $id)
     {
         $cages = Cage::where('id', $id->id)->get();
@@ -222,73 +82,20 @@ class CageController extends Controller
 
     public function make(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Cage::whereNotNull('buy')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('name', function ($row) {
-                    return $row->name;
-                })
-                ->addColumn('number', function ($row) {
-                    return $row->number;
-                })
-                ->addColumn('diameter', function ($row) {
-                    return $row->diameter;
-                })
-                ->addColumn('height', function ($row) {
-                    return $row->height;
-                })
-                ->addColumn('yarn', function ($row) {
-                    return $row->yarn;
-                })
-                ->addColumn('verticalrope', function ($row) {
-                    return $row->verticalrope;
-                })
-                ->addColumn('horizontalrope', function ($row) {
-                    return $row->horizontalrope;
-                })
-                ->addColumn('floorrope', function ($row) {
-                    return $row->floorrope;
-                })
-                ->addColumn('connectingrope', function ($row) {
-                    return $row->connectingrope;
-                })
-                ->addColumn('double', function ($row) {
-                    return $row->double;
-                })
-                ->addColumn('description', function ($row) {
-                    return $row->description;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = Jalalian::forge($row->created_at)->ago();
-                    return $created_at;
+        $Cages = Cage::whereNotNull('Archive')->get();
 
-                })
-                ->addColumn('date', function ($row) {
-                    return $row->date;
-                })
-                ->addColumn('buy', function ($row) {
-                    if (empty($row->buy)) {
-                        return $role = "<label class=\"btn btn-info\">در انتظار پاسخ</label>";
-                    } elseif ($row->buy == 1) {
-                        return $role = "<label class=\"btn btn-success\">تایید شده</label>";
-                    } elseif ($row->buy == 3) {
-                        return $role = "<label class=\"btn btn-primary\">اولویت ضروری</label>";
-                    } else {
-                        return $role = "<label class=\"btn btn-danger\">تایید نشده</label>";
-                    }
-
-                })
-                ->rawColumns(['name', 'buy'
-                    , 'number', 'diameter', 'height', 'yarn', 'verticalrope', 'horizontalrope', 'floorrope'
-                    , 'connectingrope', 'double', 'description', 'date'
-                ])
-                ->make(true);
-        }
-
-        return view('cage::make');
+        return view('cage::make', compact('Cages'));
 
     }
+    public function makeadmin(Request $request)
+    {
+
+        $Cages = Cage::whereNotNull('buy')->get();
+
+        return view('cage::make', compact('Cages'));
+
+    }
+
 
 
 }

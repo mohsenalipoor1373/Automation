@@ -16,10 +16,8 @@ class CreateLeavesTable extends Migration
         Schema::create('leaves', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-
             $table->string('from')->nullable();
             $table->string('todate')->nullable();
-
             $table->string('FromHour')->nullable();
             $table->string('until')->nullable();
             $table->string('Type');

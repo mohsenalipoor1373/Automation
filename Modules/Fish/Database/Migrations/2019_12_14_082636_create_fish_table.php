@@ -29,6 +29,8 @@ class CreateFishTable extends Migration
             $table->string('description')->nullable();
             $table->string('date')->nullable();
             $table->string('buy')->nullable();
+            $table->string('Archive')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

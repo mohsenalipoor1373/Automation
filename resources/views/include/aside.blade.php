@@ -73,7 +73,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواستهای مساعده-سرپرست')
+        @can('مساعده-سرپرست')
 
             <li class="treeview">
                 <a href="#">
@@ -83,17 +83,19 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin.module.rule.show-rule')}}"><i class="fa fa-circle-o"></i>لیست درخواست
+                    <li><a href="{{route('admin.module.rule.show-rule')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواست
                             های
                             مساعده</a>
                     </li>
-                    <li><a href="{{route('admin.module.rule.make-rule')}}"><i class="fa fa-circle-o"></i>لیست درخواستهای
+                    <li><a href="{{route('admin.module.rule.make-rule')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواستهای
                             بایگانی شده</a>
                     </li>
                 </ul>
             </li>
         @endcan
-        @can('درخواستهای مساعده-مدیریت')
+        @can('مساعده-مدیریت')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>درخواست های مساعده</span>
@@ -102,7 +104,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin.module.rule.show-admin')}}"><i class="fa fa-circle-o"></i>لیست درخواست
+                    <li><a href="{{route('admin.module.rule.show-admin')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواست
                             های
                             مساعده</a>
                     </li>
@@ -125,7 +128,8 @@
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin.module.leave.index')}}"><i class="fa fa-circle-o"></i>درخواست مرخصی</a>
                     </li>
-                    <li><a href="{{route('admin.module.leave.show')}}"><i class="fa fa-circle-o"></i>لیست درخواست های
+                    <li><a href="{{route('admin.module.leave.show')}}"><i class="fa fa-circle-o"></i>لیست درخواست
+                            های
                             مرخصی</a>
                     </li>
                     <li><a href="{{route('admin.module.leave.make')}}"><i class="fa fa-circle-o"></i>لیست درخواستهای
@@ -134,7 +138,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواستهای مرخصی-سرپرست')
+        @can('مرخصی-سرپرست')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>درخواستهای مرخصی</span>
@@ -143,7 +147,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin.module.leave.show-leave')}}"><i class="fa fa-circle-o"></i>لیست درخواست
+                    <li><a href="{{route('admin.module.leave.show-leave')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواست
                             های
                             مرخصی</a>
                     </li>
@@ -154,7 +159,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواستهای مرخصی-مدیریت')
+        @can('مرخصی-مدیریت')
 
             <li class="treeview">
                 <a href="#">
@@ -164,7 +169,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin.module.leave.show-admin')}}"><i class="fa fa-circle-o"></i>لیست درخواست
+                    <li><a href="{{route('admin.module.leave.show-admin')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواست
                             های
                             مرخصی</a>
                     </li>
@@ -185,20 +191,23 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin.module.fractions.index')}}"><i class="fa fa-circle-o"></i>درخواست کسر
+                    <li><a href="{{route('admin.module.fractions.index')}}"><i class="fa fa-circle-o"></i>درخواست
+                            کسر
                             کار</a>
                     </li>
-                    <li><a href="{{route('admin.module.fractions.show')}}"><i class="fa fa-circle-o"></i>لیست درخواست
+                    <li><a href="{{route('admin.module.fractions.show')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواست
                             های
                             کسر کار</a>
                     </li>
-                    <li><a href="{{route('admin.module.fractions.make')}}"><i class="fa fa-circle-o"></i>لیست درخواستهای
+                    <li><a href="{{route('admin.module.fractions.make')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواستهای
                             بایگانی شده</a>
                     </li>
                 </ul>
             </li>
         @endcan
-        @can('درخواستهای کسر کار-سرپرست')
+        @can('کسر کار-سرپرست')
 
             <li class="treeview">
                 <a href="#">
@@ -220,7 +229,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواستهای کسر کار-مدیریت')
+        @can('کسر کار-مدیریت')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>درخواست های کسر کار</span>
@@ -265,7 +274,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواستهای اضافه کار-مدیریت')
+        @can('اضافه کار-مدیریت')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>درخواست های اضافه کار</span>
@@ -310,7 +319,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواست های ماموریت-سرپرست')
+        @can('ماموریت-سرپرست')
 
             <li class="treeview">
                 <a href="#">
@@ -332,7 +341,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواست های ماموریت-مدیریت')
+        @can('ماموریت-مدیریت')
 
             <li class="treeview">
                 <a href="#">
@@ -377,7 +386,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواست های خرید کالا-سرپرست')
+        @can('خرید کالا-سرپرست')
 
             <li class="treeview">
                 <a href="#">
@@ -399,7 +408,7 @@
                 </ul>
             </li>
         @endcan
-        @can('درخواست های خرید کالا-مدیریت')
+        @can('خرید کالا-مدیریت')
 
             <li class="treeview">
                 <a href="#">
@@ -421,72 +430,94 @@
                 </ul>
             </li>
         @endcan
-
-
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-edit"></i> <span>تولید تور قفس</span>
-                <span class="pull-left-container">
+        @can('تور قفس')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>تولید تور قفس</span>
+                    <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{route('admin.module.cage.index')}}"><i class="fa fa-circle-o"></i>ثبت تور قفس
-                    </a>
-                </li>
-                <li><a href="{{route('admin.module.cage.list')}}"><i class="fa fa-circle-o"></i>لیست درخواست
-                        های
-                        تور قفس</a>
-                </li>
-                <li><a href="{{route('admin.module.cage.make-admin')}}"><i class="fa fa-circle-o"></i>لیست
-                        درخواستهای
-                        بایگانی شده</a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-edit"></i> <span>درخواستهای خرید تور قفس</span>
-                <span class="pull-left-container">
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin.module.cage.index')}}"><i class="fa fa-circle-o"></i>ثبت تور قفس
+                        </a>
+                    </li>
+                    <li><a href="{{route('admin.module.cage.list')}}"><i class="fa fa-circle-o"></i>لیست درخواست
+                            های
+                            تور قفس</a>
+                    </li>
+                    <li><a href="{{route('admin.module.cage.make-admin')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواستهای
+                            بایگانی شده</a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
+        @can('درخواستهای تور قفس')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>درخواستهای خرید تور قفس</span>
+                    <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{route('admin.module.cage.show-admin')}}"><i class="fa fa-circle-o"></i>لیست
-                        درخواست
-                        های
-                        تور قفس</a>
-                </li>
-                <li><a href="{{route('admin.module.cage.make-admin')}}"><i class="fa fa-circle-o"></i>لیست
-                        درخواستهای
-                        بایگانی شده</a>
-                </li>
-            </ul>
-        </li>
-
-
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-edit"></i> <span>تولید تورصید ماهی</span>
-                <span class="pull-left-container">
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin.module.cage.show-admin')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواست
+                            های
+                            تور قفس</a>
+                    </li>
+                    <li><a href="{{route('admin.module.cage.makeadm')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواستهای
+                            بایگانی شده</a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
+        @can('تور صیدماهی')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>تولید تورصید ماهی</span>
+                    <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{route('admin.module.fish.index')}}"><i class="fa fa-circle-o"></i>ثبت تورصید ماهی
-                    </a>
-                </li>
-                <li><a href="{{route('admin.module.fish.list')}}"><i class="fa fa-circle-o"></i> درخواست
-                        های
-                        تورصید ماهی</a>
-                </li>
-                <li><a href="{{route('admin.module.cage.make-admin')}}"><i class="fa fa-circle-o"></i>لیست
-                        درخواستهای
-                        بایگانی شده</a>
-                </li>
-            </ul>
-        </li>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin.module.fish.index')}}"><i class="fa fa-circle-o"></i>ثبت تورصید ماهی
+                        </a>
+                    </li>
+                    <li><a href="{{route('admin.module.fish.list')}}"><i class="fa fa-circle-o"></i> درخواست
+                            های
+                            تورصید ماهی</a>
+                    </li>
+                    <li><a href="{{route('admin.module.fish.details')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواستهای
+                            بایگانی شده</a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
+        @can('درخواستهای تور صیدماهی')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>درخواستهای تور صیدماهی</span>
+                    <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin.module.fish.make')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواست
+                            های
+                            تور قفس</a>
+                    </li>
+                    <li><a href="{{route('admin.module.fish.makea')}}"><i class="fa fa-circle-o"></i>لیست
+                            درخواستهای
+                            بایگانی شده</a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
 
     </ul>
 </section>

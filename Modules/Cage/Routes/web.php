@@ -21,4 +21,5 @@ Route::prefix('cage')->group(function () {
     Route::get('date/{id?}', 'CageController@date')->name('admin.module.cage.admin.date');
     Route::get('showadmin', 'CageController@showadmin')->name('admin.module.cage.show-admin');
     Route::get('make', 'CageController@make')->name('admin.module.cage.make-admin');
+    Route::get('makeadmin', 'CageController@makeadmin')->name('admin.module.cage.makeadm');
 });

@@ -86,11 +86,11 @@
 
                                 <td>
                                     @if(empty($Leave->Supervisor))
-                                        <a href="{{route('admin.module.leave.edit',$TheRule->id)}}">
+                                        <a href="{{route('admin.module.leave.edit',$Leave->id)}}">
                                             <img src="{{url('/icon/icons8-edit-property-48.png')}}"
                                                  width="25" title="ویرایش ">
                                         </a>
-                                        <a href="{{route('admin.module.leave.delete',$TheRule->id)}}">
+                                        <a href="{{route('admin.module.leave.delete',$Leave->id)}}">
                                             <img src="{{url('/icon/icons8-delete-bin-48.png')}}"
                                                  width="25" title="حذف ">
                                         </a>

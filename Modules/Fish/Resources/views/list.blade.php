@@ -1,24 +1,24 @@
 @extends('layouts.master')
-
 @section('content')
+    @include('massage.msg')
     <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">لیست درخواست های تولید تور قفس</h3>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        لیست درخواست های تولید تور صید ماهی
+                    </div>
+                    <div class="tools"></div>
                 </div>
-                <!-- /.box-header -->
-                @include('massage.msg')
-
-                <div class="box-body">
-                    <table class="table table-bordered table-striped data-table">
+                <div class="portlet-body">
+                    <table class="table table-striped table-bordered table-hover" id="sample_2">
                         <thead>
                         <tr>
                             <th>نام مشتری</th>
                             <th>تعداد</th>
                             <th>ابعاد</th>
                             <th>مش</th>
-                            <th>جنس نخ ونمره</th>
+                            <th>جنس نخ و نمره</th>
                             <th>سرب</th>
                             <th>طناب1</th>
                             <th>طناب2</th>
@@ -33,53 +33,73 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($Fishs as $Fish)
+                            <tr>
+                                <td>{{$Fish->name}}</td>
+                                <td>{{$Fish->number}}</td>
+                                <td>{{$Fish->dimensions}}</td>
+                                <td>{{$Fish->mesh}}</td>
+                                <td>{{$Fish->yarn}}</td>
+                                <td>{{$Fish->lead}}</td>
+                                <td>{{$Fish->ropeone}}</td>
+                                <td>{{$Fish->ropetwo}}</td>
+                                <td>{{$Fish->booy}}</td>
+                                <td>{{$Fish->strands}}</td>
+                                <td>{{$Fish->ring}}</td>
+                                <td>
+                                    @if(empty($Fish->description))
+                                        <span class="btn btn-info">توضیحی ثبت نشده است</span>
+                                    @else
+                                        <span class="btn btn-info"
+                                              title="{{$Fish->description}}">{{str_limit($Fish->description,20)}}</span>
+                                    @endif
+                                </td>
+                                <td>{{\Morilog\Jalali\Jalalian::forge($Fish->created_at)->format('Y/m/d')}}</td>
+                                <td>
+
+
+                                    @if(empty($Fish->date))
+                                        <span class="btn btn-info">در انتظار پاسخ</span>
+                                    @else
+                                        <span class="btn btn-info">{{$Fish->date}}</span>
+                                    @endif
+
+                                </td>
+
+                                <td>
+                                    @if(empty($Fish->buy))
+                                        <span class="btn btn-info">در انتظار پاسخ</span>
+                                    @elseif($Fish->buy == 1)
+                                        <span class="btn btn-success">تایید شده</span>
+                                    @elseif($Fish->buy == 3)
+                                        <span class="btn btn-success">اولویت ضروری</span>
+                                    @else
+                                        <span class="btn btn-success">تایید نشده</span>
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if(!empty($Fish->date) or !empty($Fish->buy))
+                                        <span class="btn btn-info">به این درخواست دسترسی ندارید</span>
+
+                                    @else
+                                        <a href="{{route('admin.module.mission.edit',$Fish->id)}}">
+                                            <img src="{{url('/icon/icons8-edit-property-48.png')}}"
+                                                 width="25" title="ویرایش ">
+                                        </a>
+                                        <a href="{{route('admin.module.mission.delete',$Fish->id)}}">
+                                            <img src="{{url('/icon/icons8-delete-bin-48.png')}}"
+                                                 width="25" title="حذف ">
+                                        </a>
+                                    @endif
+
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
-                <!-- /.box-body -->
             </div>
         </div>
     </div>
-    <script src="{{asset('/bower_components/jquery/dist/jquery.min.js')}}"></script>
-
-
-    <script type="text/javascript">
-        $(function () {
-
-            var table = $('.data-table').DataTable({
-                processing: true,
-                serverSide: true,
-                scrollY: '300px',
-                sScrollX: '100%',
-                sScrollXInner: '170%',
-                scrollCollapse: true,
-                paging: false,
-                rowReorder: true,
-
-                ajax: "{{ route('admin.module.fish.list') }}",
-                columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'number', name: 'number'},
-                    {data: 'dimensions', name: 'dimensions'},
-                    {data: 'mesh', name: 'mesh'},
-                    {data: 'yarn', name: 'yarn'},
-                    {data: 'lead', name: 'lead'},
-                    {data: 'ropeone', name: 'ropeone'},
-                    {data: 'ropetwo', name: 'ropetwo'},
-                    {data: 'booy', name: 'booy'},
-                    {data: 'strands', name: 'strands'},
-                    {data: 'ring', name: 'ring'},
-                    {data: 'description', name: 'description'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'date', name: 'date'},
-
-                    {data: 'buy', name: 'buy'},
-                    {
-                        data: 'action', name: 'action'
-                    },
-                ]
-            });
-        });
-
-    </script>
 @endsection

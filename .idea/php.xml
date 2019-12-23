@@ -92,6 +92,7 @@
       <path value="$PROJECT_DIR$/vendor/morilog/jalali" />
       <path value="$PROJECT_DIR$/vendor/kavenegar/php" />
       <path value="$PROJECT_DIR$/vendor/kavenegar/laravel" />
+      <path value="$PROJECT_DIR$/vendor/renatomarinho/laravel-page-speed" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

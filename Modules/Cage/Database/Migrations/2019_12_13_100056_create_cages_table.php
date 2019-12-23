@@ -28,6 +28,8 @@ class CreateCagesTable extends Migration
             $table->longText('description')->nullable();
             $table->string('date')->nullable();
             $table->string('buy')->nullable();
+            $table->string('Archive')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

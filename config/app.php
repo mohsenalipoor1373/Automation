@@ -167,6 +167,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
         Kavenegar\Laravel\ServiceProvider::class,
+        RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
+
 
         /*
          * Package Service Providers...

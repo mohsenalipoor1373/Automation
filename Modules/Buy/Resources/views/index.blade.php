@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+    @include('massage.msg')
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
