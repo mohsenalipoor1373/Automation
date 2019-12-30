@@ -42,7 +42,7 @@
                                 </td>
                                 <td>
                                     <a href="{{route('admin.module.rule.admin.true',$TheRule->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
+                                        <img src="{{url('/icon/icons8-ok-48.png')}}"
                                              width="25" title="تایید درخواست">
                                     </a>
                                     <a href="{{route('admin.module.rule.admin.false',$TheRule->id)}}">

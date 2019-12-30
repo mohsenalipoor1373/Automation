@@ -33,7 +33,7 @@ class SendSmsJob implements ShouldQueue
     public function handle()
     {
         $sender = "10004346";
-        $receptor = "09332286813";
+        $receptor = $this->user['phone'];
         if ($this->leave['history'] == null) {
             $message = $this->user['name'] . ' درخواست مرخصی از تاریخ ' . $this->leave['from'] .
                 'تا تاریخ' . $this->leave['todate'] . ' را دارد.';

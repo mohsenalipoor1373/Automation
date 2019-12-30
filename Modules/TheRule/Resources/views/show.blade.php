@@ -57,7 +57,7 @@
 
                                 </td>
                                 <td>
-                                    @if(empty($TheRule->Supervisor))
+                                    @if(empty($TheRule->Admin))
                                         <a href="{{route('admin.module.rule.edit',$TheRule->id)}}">
                                             <img src="{{url('/icon/icons8-edit-property-48.png')}}"
                                                  width="25" title="ویرایش ">
@@ -67,7 +67,7 @@
                                                  width="25" title="حذف ">
                                         </a>
                                     @else
-                                        <span class="btn btn-info">به این درخواست دسترسی ندارید</span>
+                                        <a href="{{route('admin.module.rule.save',$TheRule->id)}}"><span class="btn btn-danger">بایگانی</span></a>
                                     @endif
                                 </td>
                             </tr>

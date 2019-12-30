@@ -70,11 +70,16 @@ class TheRuleController extends Controller
                 'Supervisor' => 3,
             ]);
             $user = User::where('id', $theRule->user_id)->first();
-            SendSmsJob::dispatch($theRule, $user);
+            try {
+                SendSmsJob::dispatch($theRule, $user);
+            } catch (\Exception $exception){
+
+            }
+
         }
 
         if ($theRule) {
-            return ReturnMsgSuccess('درخواست مساعده با موفقیت ارسال شد');
+            return ReturnMsgSuccess('درخواست مساعده با موفقیت در سیستم ثبت شد');
 
         }
 
@@ -93,7 +98,7 @@ class TheRuleController extends Controller
     {
         $success = $id->delete();
         if ($success) {
-            return ReturnMsgError('با موفقیت حذف شد');
+            return ReturnMsgError('اطلاعات درخواست مساعده با موفقیت از سیستم حذف شد');
         }
 
     }
@@ -106,7 +111,7 @@ class TheRuleController extends Controller
             'description' => $request['description'],
         ]);
         if ($update) {
-            return ReturnMsgSuccess('درخواست مساعده با موفقیت ویرایش شد');
+            return ReturnMsgSuccess('اطلاعات درخواست مساعده با موفقیت ویرایش شد');
         }
 
 
@@ -231,6 +236,15 @@ class TheRuleController extends Controller
 
         }
 
+
+    }
+
+    public function save(TheRule $id)
+    {
+        TheRule::find($id->id)->update([
+            'Archive' => 1,
+        ]);
+        return ReturnMsgSuccess('اطلاعات مساعده با موفقیت در سیستم بایگانی شد');
 
     }
 

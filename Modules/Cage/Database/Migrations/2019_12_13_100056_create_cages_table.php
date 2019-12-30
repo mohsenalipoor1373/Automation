@@ -26,6 +26,9 @@ class CreateCagesTable extends Migration
             $table->string('connectingrope')->nullable();
             $table->string('double')->nullable();
             $table->longText('description')->nullable();
+            $table->string('fina')->nullable();
+            $table->string('off')->nullable();
+            $table->string('final')->nullable();
             $table->string('date')->nullable();
             $table->string('buy')->nullable();
             $table->string('Archive')->nullable();

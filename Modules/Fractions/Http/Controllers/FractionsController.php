@@ -48,15 +48,15 @@ class FractionsController extends Controller
         $input = $request->all();
         $input['user_id'] = $request['id'];
         $leave = Fractions::create($input);
-        if ($leave->Priority == 1) {
-            $leave->update([
-                'Supervisor' => 3,
-            ]);
-//            $user = User::where('id', $leave->user_id)->first();
-//            \Modules\Leave\Jobs\SendSmsJob::dispatch($leave, $user);
-        }
+//        if ($leave->Priority == 1) {
+//            $leave->update([
+//                'Supervisor' => 3,
+//            ]);
+////            $user = User::where('id', $leave->user_id)->first();
+////            \Modules\Leave\Jobs\SendSmsJob::dispatch($leave, $user);
+//        }
 
-        return ReturnMsgSuccess('درخواست کسر کار با موفقیت ارسال شد');
+        return ReturnMsgSuccess('اطلاعات درخواست کسر کار با موفقیت در سیستم ثبت شد');
     }
 
     public function update(Request $request)
@@ -69,7 +69,7 @@ class FractionsController extends Controller
             'Priority' => $request['Priority'],
             'description' => $request['description'],
         ]);
-        return ReturnMsgSuccess('درخواست کسر کار با موفقیت ویرایش شد');
+        return ReturnMsgSuccess('اطلاعات درخواست کسر کار با موفقیت ویرایش شد');
 
 
     }
@@ -203,5 +203,14 @@ class FractionsController extends Controller
             return view('fractions::edit', compact('id', 'user'));
 
     }
+    public function save(Fractions $id)
+    {
+        Fractions::find($id->id)->update([
+            'Archive' => 1,
+        ]);
+        return ReturnMsgSuccess('اطلاعات کسر کار پرسنل با موفقیت در سیستم بایگانی شد');
+
+    }
+
 
 }

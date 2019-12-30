@@ -19,7 +19,6 @@ class CreateFractionsTable extends Migration
             $table->string('type');
             $table->string('Term');
             $table->string('history')->nullable();
-            $table->string('Priority');
             $table->text('description')->nullable();
             $table->string('Archive')->nullable();
             $table->string('Supervisor')->nullable();

@@ -30,6 +30,7 @@ Route::prefix('therule')->group(function () {
     Route::get('/rule/admin/{id?}', 'TheRuleController@adminTrue')->name('admin.module.rule.admin.true');
     Route::get('/rule/admin/false/{id?}', 'TheRuleController@adminFalse')->name('admin.module.rule.admin.false');
     Route::get('/rule/check', 'TheRuleController@check')->name('admin.module.rule.check');
+    Route::get('/rule/save/{id?}', 'TheRuleController@save')->name('admin.module.rule.save');
 
 
 });

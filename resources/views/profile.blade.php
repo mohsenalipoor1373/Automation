@@ -30,12 +30,6 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>گفتگو ها</b> <a class="pull-left">0</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>نام های ارسالی</b> <a class="pull-left">0</a>
-                        </li>
-                        <li class="list-group-item">
                             <b>وضعیت</b> <a class="pull-left">انلاین</a>
                         </li>
                     </ul>
@@ -59,76 +53,103 @@
                     <!-- /.tab-pane -->
 
                     <div class="active tab-pane" id="activity">
-                        <form class="form-horizontal" method="post" action="{{route('edit.profile')}}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">نام و نام خانوادگی</label>
+                        <div class="portlet box blue">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    مشخصات پرسنل
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-body">
+                                    <form class="form-horizontal" method="post" action="{{route('edit.profile')}}">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-3 control-label">نام و نام
+                                                خانوادگی</label>
 
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="name"
-                                           value="{{auth()->user()->name}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">کد ملی</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="name"
+                                                       value="{{auth()->user()->name}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-3 control-label">کد ملی</label>
 
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="email"
-                                           value="{{auth()->user()->email}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">شماره تماس</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="email"
+                                                       value="{{auth()->user()->email}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-3 control-label">شماره تماس</label>
 
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="phone"
-                                           value="{{auth()->user()->phone}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">تصویر کاربر</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="phone"
+                                                       value="{{auth()->user()->phone}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-3 control-label">تصویر کاربر</label>
 
-                                <div class="col-sm-9">
-                                    <input type="file" class="form-control" name="avatar" placeholder="تصویر کاربر">
+                                            <div class="col-sm-9">
+                                                <input type="file" class="form-control" name="avatar"
+                                                       placeholder="تصویر کاربر">
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-primary">تایید</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">ارسال</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
+
+
                     <div class="tab-pane" id="settings">
-                        <form class="form-horizontal" method="post" action="{{route('edit.pass')}}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">کلمه عبور قبلی</label>
-
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" name="oldpass"
-                                           placeholder="کلمه عبور قبلی">
+                        <div class="portlet box blue">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    عملیات رمز
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">کلمه عبور جدید</label>
+                            <div class="portlet-body form">
+                                <div class="form-body">
+                                    <form class="form-horizontal" method="post" action="{{route('edit.pass')}}">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-3 control-label">کلمه عبور قبلی</label>
 
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" name="newpass"
-                                           placeholder="کلمه عبور جدید">
-                                </div>
-                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" name="oldpass"
+                                                       placeholder="کلمه عبور قبلی">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-3 control-label">کلمه عبور جدید</label>
 
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">ارسال</button>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" name="newpass"
+                                                       placeholder="کلمه عبور جدید">
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-primary">تایید</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
+                                <!-- /.tab-pane -->
                             </div>
-                        </form>
+                            <!-- /.tab-content -->
+                        </div>
                     </div>
-                    <!-- /.tab-pane -->
                 </div>
-                <!-- /.tab-content -->
             </div>
             <!-- /.nav-tabs-custom -->
         </div>

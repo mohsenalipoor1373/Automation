@@ -2,6 +2,7 @@
 
 namespace Modules\Buy\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -109,6 +110,46 @@ class BuyController extends Controller
         return view('buy::stores', compact('Buys'));
 
     }
+
+    public function save(Buy $id)
+    {
+        Buy::find($id->id)->update([
+            'Archive' => 1,
+        ]);
+        return ReturnMsgSuccess('اطلاعات درخواست خرید با موفقیت در سیستم بایگانی شد');
+
+    }
+
+    public function delete(Buy $id)
+    {
+        $id->delete();
+        return ReturnMsgError('اطلاعات درخواست خرید با موفقیت از سیستم حذف شد');
+
+    }
+
+    public function edit(Buy $id)
+    {
+        $roles = Role::get();
+        return view('buy::edit', compact('id', 'roles'));
+
+    }
+
+    public function update(Request $request)
+    {
+        $update = Buy::find($request['id'])->update([
+           'name'=>$request['name'],
+           'role_id'=>$request['role_id'],
+           'number'=>$request['number'],
+           'store'=>$request['store'],
+           'Priority'=>$request['Priority'],
+           'description'=>$request['description'],
+        ]);
+        if ($update) {
+            return ReturnMsgSuccess('اطلاعات درخواست خرید با موفقیت ویرایش شد');
+        }
+
+    }
+
 
 
 }

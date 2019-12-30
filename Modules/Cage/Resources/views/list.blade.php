@@ -77,15 +77,16 @@
                                 </td>
 
                                 <td>
-                                    @if(!empty($Cage->date) or !empty($Cage->buy))
-                                        <span class="btn btn-info">به این درخواست دسترسی ندارید</span>
+                                    @if(!empty($Cage->buy))
+                                        <a href="{{route('admin.module.buy.save',$Cage->id)}}"><span
+                                                class="btn btn-info">بایگانی</span></a>
 
                                     @else
-                                        <a href="{{route('admin.module.mission.edit',$Cage->id)}}">
+                                        <a href="{{route('admin.module.buy.edit',$Cage->id)}}">
                                             <img src="{{url('/icon/icons8-edit-property-48.png')}}"
                                                  width="25" title="ویرایش ">
                                         </a>
-                                        <a href="{{route('admin.module.mission.delete',$Cage->id)}}">
+                                        <a href="{{route('admin.module.buy.delete',$Cage->id)}}">
                                             <img src="{{url('/icon/icons8-delete-bin-48.png')}}"
                                                  width="25" title="حذف ">
                                         </a>

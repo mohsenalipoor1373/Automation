@@ -56,17 +56,17 @@
 
                                 </td>
                                 <td>
-                                    @if(empty($OverTime->Supervisor))
-                                        <a href="{{route('admin.module.rule.edit',$OverTime->id)}}">
+                                    @if(empty($OverTime->Admin))
+                                        <a href="{{route('admin.module.overtime.edit',$OverTime->id)}}">
                                             <img src="{{url('/icon/icons8-edit-property-48.png')}}"
                                                  width="25" title="ویرایش ">
                                         </a>
-                                        <a href="{{route('admin.module.rule.delete',$OverTime->id)}}">
+                                        <a href="{{route('admin.module.overtime.delete',$OverTime->id)}}">
                                             <img src="{{url('/icon/icons8-delete-bin-48.png')}}"
                                                  width="25" title="حذف ">
                                         </a>
                                     @else
-                                        <span class="btn btn-info">به این درخواست دسترسی ندارید</span>
+                                        <a href="{{route('admin.module.overtime.save',$OverTime->id)}}"><span class="btn btn-danger">بایگانی</span></a>
                                     @endif
                                 </td>
                             </tr>

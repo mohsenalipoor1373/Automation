@@ -41,9 +41,9 @@
                                     @elseif($Mission->Supervisor == 1)
                                         <span class="btn btn-success">تایید شده</span>
                                     @elseif($Mission->Supervisor == 3)
-                                        <span class="btn btn-success">اولویت ضروری</span>
+                                        <span class="btn btn-primary">اولویت ضروری</span>
                                     @else
-                                        <span class="btn btn-success">تایید نشده</span>
+                                        <span class="btn btn-danger">تایید نشده</span>
                                     @endif
                                 </td>
                                 <td>
@@ -52,7 +52,7 @@
                                     @elseif($Mission->Admin == 1)
                                         <span class="btn btn-success">تایید شده</span>
                                     @else
-                                        <span class="btn btn-success">تایید نشده</span>
+                                        <span class="btn btn-danger">تایید نشده</span>
                                     @endif
                                 </td>
 
@@ -67,7 +67,8 @@
                                                  width="25" title="حذف ">
                                         </a>
                                     @else
-                                        <span class="btn btn-info">به این درخواست دسترسی ندارید</span>
+                                        <a href="{{route('admin.module.mission.save',$Mission->id)}}"><span
+                                                class="btn btn-danger">بایگانی</span></a>
                                     @endif
 
                                 </td>

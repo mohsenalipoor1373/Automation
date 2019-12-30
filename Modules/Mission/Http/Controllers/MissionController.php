@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Leave\Entities\Leave;
 use Modules\Mission\Entities\Mission;
+use Modules\TheRule\Jobs\SendSmsJob;
 use Morilog\Jalali\Jalalian;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
@@ -34,8 +35,20 @@ class MissionController extends Controller
         $input = $request->all();
         $input['user_id'] = $request->id;
 
-        Mission::create($input);
-        return ReturnMsgSuccess('ماموریت با موفقیت در سیستم ثبت شد');
+        $mission = Mission::create($input);
+//        if ($mission->Priority == 1) {
+//            $mission->update([
+//                'Supervisor' => 3,
+//            ]);
+//            $user = User::where('id', $mission->user_id)->first();
+//            try {
+//                SendSmsJob::dispatch($mission, $user);
+//            } catch (\Exception $exception) {
+//
+//            }
+//
+//        }
+        return ReturnMsgSuccess('اطلاعات ماموریت با موفقیت در سیستم ثبت شد');
 
     }
 
@@ -126,7 +139,7 @@ class MissionController extends Controller
     public function delete(Mission $id)
     {
         $id->delete();
-        return ReturnMsgError('مشخصات ماموریت با موفقیت حذف شد');
+        return ReturnMsgError('اطلاعات ماموریت پرسنل با موفقیت از سیستم حذف شد');
 
 
     }
@@ -140,9 +153,18 @@ class MissionController extends Controller
             'to' => $request['to'],
             'totime' => $request['totime'],
             'summary' => $request['summary'],
+            'Priority' => $request['Priority'],
             'description' => $request['description'],
         ]);
-        return ReturnMsgSuccess('مشخصات ماموریت با موفقیت ویرایش شد');
+        return ReturnMsgSuccess('اطلاعات ماموریت با موفقیت از سیستم حذف شد');
+    }
+
+    public function save(Mission $id)
+    {
+        Mission::find($id->id)->update([
+            'Archive' => 1,
+        ]);
+        return ReturnMsgSuccess('اطلاعات ماموریت پرسنل با موفقیت در سیستم ثبت شد');
     }
 
 }

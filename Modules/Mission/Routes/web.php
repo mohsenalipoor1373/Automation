@@ -28,4 +28,5 @@ Route::prefix('mission')->group(function () {
     Route::get('edit/{id?}', 'MissionController@edit')->name('admin.module.mission.edit');
     Route::get('delete/{id?}', 'MissionController@delete')->name('admin.module.mission.delete');
     Route::post('update', 'MissionController@update')->name('admin.module.mission.update');
+    Route::get('save/{id?}', 'MissionController@save')->name('admin.module.mission.save');
 });

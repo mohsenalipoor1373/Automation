@@ -10,6 +10,7 @@ use Modules\Cage\Entities\Cage;
 use Morilog\Jalali\Jalalian;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
+use function App\Providers\ReturnMsgError;
 use function App\Providers\ReturnMsgSuccess;
 
 class CageController extends Controller
@@ -23,7 +24,7 @@ class CageController extends Controller
     public function store(Request $request)
     {
         Cage::create($request->all());
-        return ReturnMsgSuccess('مشخصات خرید کالا با موفقیت در سیستم ثبت شد');
+        return ReturnMsgSuccess('اطلاعات تولید تورقفس با موفقیت در سیستم ثبت شد');
 
     }
 
@@ -55,7 +56,7 @@ class CageController extends Controller
             Cage::find($cage->id)->update([
                 'date' => $request['date'],
             ]);
-        return ReturnMsgSuccess('تاریخ با موفقیت برای این درخواست ثبت شد');
+        return ReturnMsgSuccess('تعیین تاریخ برای تولید تورقفس  با موفقیت در سیستم ثبت شد');
     }
 
     public function success(Cage $id)
@@ -65,7 +66,7 @@ class CageController extends Controller
             Cage::find($cage->id)->update([
                 'buy' => 1,
             ]);
-        return ReturnMsgSuccess('با درخواست تولید موافقت شد');
+        return ReturnMsgSuccess('با درخواست تولید تورقفس  موافقت شد');
 
     }
 
@@ -76,7 +77,7 @@ class CageController extends Controller
             Cage::find($cage->id)->update([
                 'buy' => 2,
             ]);
-        return ReturnMsgSuccess('درخواست تولید رد شد');
+        return ReturnMsgSuccess('درخواست تولید تورقفس  رد شد');
 
     }
 
@@ -87,6 +88,7 @@ class CageController extends Controller
         return view('cage::make', compact('Cages'));
 
     }
+
     public function makeadmin(Request $request)
     {
 
@@ -96,6 +98,35 @@ class CageController extends Controller
 
     }
 
+    public function save(Cage $id)
+    {
+        Cage::find($id->id)->update([
+            'Archive' => 1,
+        ]);
+        return ReturnMsgSuccess('اطلاعات تولید تورقفس  با موفقیت در سیستم بایگانی شد');
+
+    }
+
+    public function edit(Cage $id)
+    {
+        return view('cage::edit', compact('id'));
+
+    }
+
+    public function delete(Cage $id)
+    {
+        $id->delete();
+        return ReturnMsgError('اطلاعات تولید تورقفس  با موفقیت از سیستم حذف شد');
+
+    }
+
+    public function update(Request $request)
+    {
+        $update = Cage::find($request['id'])->update($request->all());
+        if ($update) {
+            return ReturnMsgSuccess('اطلاعات تولید تورقفس  با موفقیت ویرایش شد');
+        }
+    }
 
 
 }

@@ -52,19 +52,11 @@
                                     @elseif($Mission->Admin == 1)
                                         <span class="btn btn-success">تایید شده</span>
                                     @else
-                                        <span class="btn btn-success">تایید نشده</span>
+                                        <span class="btn btn-danger">تایید نشده</span>
                                     @endif
                                 </td>
 
                                 <td>
-                                    <a href="{{route('admin.module.mission.admin.success',$Mission->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
-                                             width="25" title="تایید درخواست">
-                                    </a>
-                                    <a href="{{route('admin.module.mission.admin.error',$Mission->id)}}">
-                                        <img src="{{url('/icon/icons8-delete-64.png')}}"
-                                             width="25" title="مخالفت با درخواست">
-                                    </a>
                                     <a href="{{route('admin.module.rule.supervisor.list',$Mission->id)}}">
                                         <img src="{{url('/icon/icons8-zoom-in-64.png')}}"
                                              width="25" title="مشاهده جزییات ">

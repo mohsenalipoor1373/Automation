@@ -34,7 +34,7 @@
                                 <td>{{\Morilog\Jalali\Jalalian::forge($Mission->created_at)->format('Y/m/d')}}</td>
                                 <td>
                                     <a href="{{route('admin.module.mission.super.success',$Mission->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
+                                        <img src="{{url('/icon/icons8-ok-48.png')}}"
                                              width="25" title="تایید درخواست">
                                     </a>
                                     <a href="{{route('admin.module.mission.super.error',$Mission->id)}}">

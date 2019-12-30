@@ -30,4 +30,6 @@ Route::prefix('leave')->group(function () {
     Route::get('/supervisor/list/{id?}', 'LeaveController@list')->name('admin.module.leave.supervisor.list');
     Route::get('/check', 'LeaveController@check')->name('admin.module.leave.check');
     Route::get('/make/supervisor', 'LeaveController@make')->name('admin.module.leave.make');
+    Route::get('/save/{id?}', 'LeaveController@save')->name('admin.module.leave.save');
+
 });

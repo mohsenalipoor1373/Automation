@@ -60,7 +60,7 @@
                                 </td>
                                 <td>
                                     <a href="{{route('admin.module.fractions.admin.true',$Fraction->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
+                                        <img src="{{url('/icon/icons8-ok-48.png')}}"
                                              width="25" title="تایید درخواست">
                                     </a>
                                     <a href="{{route('admin.module.fractions.admin.false',$Fraction->id)}}">

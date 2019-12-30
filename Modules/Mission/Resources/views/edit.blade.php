@@ -18,7 +18,8 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>نام و نام خانوادگی</label>
-                                    <input type="text" name="name" class="form-control" value="{{$id->user->name}}" disabled>
+                                    <input type="text" name="name" class="form-control" value="{{$id->user->name}}"
+                                           disabled>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -80,6 +81,15 @@
                                            value="{{$id->totime}}">
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>اولویت</label>
+                                    <select class="form-control" name="Priority">
+                                        <option value="1" @if($id->Priority == 1) selected @endif>ضروری</option>
+                                        <option value="2" @if($id->Priority == 2) selected @endif>عادی</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -88,7 +98,6 @@
                                               style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$id->summary}}</textarea>
                                 </div>
                             </div>
-
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>توضیحات</label>

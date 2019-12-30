@@ -9,6 +9,7 @@ use Modules\Cage\Entities\Cage;
 use Modules\Fish\Entities\Fish;
 use Morilog\Jalali\Jalalian;
 use Yajra\DataTables\Facades\DataTables;
+use function App\Providers\ReturnMsgError;
 use function App\Providers\ReturnMsgSuccess;
 
 class FishController extends Controller
@@ -23,7 +24,7 @@ class FishController extends Controller
     {
         Fish::create($request->all());
 
-        return ReturnMsgSuccess('درخواست شما با موفقیت ارسال شد');
+        return ReturnMsgSuccess('اطلاعات درخواست تولید تور صیدماهی با موفقیت در سیستم ثبت شد');
 
     }
 
@@ -44,11 +45,22 @@ class FishController extends Controller
 
     public function make()
     {
-        $Fishs = Fish::whereNull('buy')->get();
+        $Fishs = Fish::whereNull('buy')->whereNotNull('fina')->get();
 
         return view('fish::make', compact('Fishs'));
 
     }
+
+
+
+    public function makes()
+    {
+        $Fishs = Fish::whereNull('fina')->get();
+
+        return view('fish::makes', compact('Fishs'));
+
+    }
+
 
     public function datestore(Request $request)
     {
@@ -57,7 +69,7 @@ class FishController extends Controller
             Fish::find($cage->id)->update([
                 'date' => $request['date'],
             ]);
-        return ReturnMsgSuccess('تاریخ با موفقیت برای این درخواست ثبت شد');
+        return ReturnMsgSuccess('تعیین تاریخ با موفقیت برای این تور صید ماهی در سیستم ثبت شد');
     }
 
     public function showdate(Fish $id)
@@ -81,7 +93,7 @@ class FishController extends Controller
             Fish::find($cage->id)->update([
                 'buy' => 1,
             ]);
-        return ReturnMsgSuccess('با درخواست تولید موافقت شد');
+        return ReturnMsgSuccess('با درخواست تولید تور صیدماهی موافقت شد');
 
     }
 
@@ -92,10 +104,37 @@ class FishController extends Controller
             Fish::find($cage->id)->update([
                 'buy' => 2,
             ]);
-        return ReturnMsgSuccess('درخواست تولید رد شد');
+        return ReturnMsgSuccess('با درخواست تولید تور صیدماهی موافقت نشد');
 
     }
 
+    public function save(Fish $id)
+    {
+        Fish::find($id->id)->update([
+            'Archive' => 1,
+        ]);
+        return ReturnMsgSuccess('اطلاعات تورصیدماهی با موفقیت در سیستم بایگانی شد');
+
+    }
+    public function edit(Fish $id)
+    {
+        return view('fish::edit', compact('id'));
+
+    }
+
+    public function delete(Fish $id)
+    {
+        $id->delete();
+        return ReturnMsgError('اطلاعات تولید تورصیدماهی با موفقیت از سیستم حذف شد');
+
+    }
+    public function update(Request $request)
+    {
+        $update = Fish::find($request['id'])->update($request->all());
+        if ($update) {
+            return ReturnMsgSuccess('اطلاعات تولید تورصیدماهی با موفقیت ویرایش شد');
+        }
+    }
 
 
 }

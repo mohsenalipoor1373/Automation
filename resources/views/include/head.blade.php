@@ -43,17 +43,28 @@
             $work = \Modules\Fractions\Entities\Fractions::whereNull('Supervisor')->count();
             $buy = \Modules\Buy\Entities\Buy::whereNull('Supervisor')->count();
             $cage = \Modules\Cage\Entities\Cage::whereNull('buy')->count();
-            $fish= \Modules\Fish\Entities\Fish::whereNull('buy')->count();
-
+            $fish= \Modules\Fish\Entities\Fish::whereNull('buy')->whereNotNull('fina')->count();
+            $mission= \Modules\Mission\Entities\Mission::whereNull('Supervisor')->count();
+            $overtime = \Modules\Overtime\Entities\Overtime::whereNotNull('Admin')->whereNull('Archive')->count();
         @endphp
 
         <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
-                <span class="label label-warning">{{$rule+$leave+$work+$buy+$cage+$fish}}</span>
+                <?php
+                $sum = $rule + $leave + $work + $buy + $cage + $fish + $overtime + $mission;
+                ?>
+                @if(!empty($sum))
+                    <span class="label label-warning">{{$sum}}</span>
+                @endif
             </a>
             <ul class="dropdown-menu">
-                <li class="header">{{$rule+$leave+$work+$buy+$cage+$fish}} اعلان جدید</li>
+                <?php
+                $sum = $rule + $leave + $work + $buy + $cage + $fish + $overtime + $mission;
+                ?>
+                @if(!empty($sum))
+                    <li class="header">{{$sum}} اعلان جدید</li>
+                @endif
                 <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
@@ -107,12 +118,272 @@
                             @if(!empty($fish))
                                 <li>
                                     <a href="{{route('admin.module.fish.make')}}">
-                                        <i class="fa fa-warning text-yellow"></i> {{$fish}} درخواست تولید تور صیدماهی دارید
+                                        <i class="fa fa-warning text-yellow"></i> {{$fish}} درخواست تولید تور صیدماهی
+                                        دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+                        @can('اضافه کار')
+                            @if(!empty($overtime))
+                                <li>
+                                    <a href="{{route('admin.module.overtime.show')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$overtime}} پاسخ اضافه کار
+                                        دارید
                                     </a>
                                 </li>
                             @endif
                         @endcan
 
+                        @can('ماموریت-سرپرست')
+                            @if(!empty($mission))
+                                <li>
+                                    <a href="{{route('admin.module.mission.show-supervsior')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$mission}} درخواست ماموریت
+                                        دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+
+
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
+
+    @can('مساعده-مدیریت')
+        @php
+            $rule = \Modules\TheRule\Entities\TheRule::whereNull('Admin')->whereNotNull('Supervisor')->count();
+            $leave = \Modules\Leave\Entities\Leave::whereNull('Admin')->whereNotNull('Supervisor')->count();
+            $work = \Modules\Fractions\Entities\Fractions::whereNull('Admin')->whereNotNull('Supervisor')->count();
+            $buy = \Modules\Buy\Entities\Buy::whereNull('Admin')->whereNotNull('Supervisor')->count();
+            $mission = \Modules\Mission\Entities\Mission::whereNull('Admin')->whereNotNull('Supervisor')->count();
+            $overtime = \Modules\Overtime\Entities\Overtime::whereNull('Admin')->count();
+        @endphp
+
+        <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <?php
+                $sum = $rule + $leave + $work + $buy + $overtime + $mission;
+                ?>
+                @if(!empty($sum))
+                    <span class="label label-warning">{{$sum}}</span>
+                @endif
+            </a>
+            <ul class="dropdown-menu">
+                <?php
+                $sum = $rule + $leave + $work + $buy + $overtime + $mission;
+                ?>
+                @if(!empty($sum))
+                    <li class="header">{{$sum}} اعلان جدید</li>
+                @endif
+                <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu">
+                        @can('مساعده-مدیریت')
+                            @if(!empty($rule))
+                                <li>
+                                    <a href="{{route('admin.module.rule.show-admin')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$rule}} درخواست مساعده دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+                        @can('مرخصی-مدیریت')
+                            @if(!empty($leave))
+                                <li>
+                                    <a href="{{route('admin.module.leave.show-admin')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$leave}} درخواست مرخصی دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+
+                        @can('کسر کار-مدیریت')
+                            @if(!empty($work))
+                                <li>
+                                    <a href="{{route('admin.module.fractions.show-admin')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$work}} درخواست کسر کار دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+                        @can('خرید کالا-مدیریت')
+                            @if(!empty($buy))
+                                <li>
+                                    <a href="{{route('admin.module.buy.show-admin')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$buy}} درخواست خرید کالا دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+                        @can('اضافه کار-مدیریت')
+                            @if(!empty($overtime))
+                                <li>
+                                    <a href="{{route('admin.module.overtime.admin')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$overtime}} درخواست اضافه کار دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+
+
+                        @can('ماموریت-مدیریت')
+                            @if(!empty($mission))
+                                <li>
+                                    <a href="{{route('admin.module.mission.show-admin')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$mission}} درخواست ماموریت دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+
+
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
+
+    @can('مساعده')
+        @php
+            $rule = \Modules\TheRule\Entities\TheRule::whereNotNull('Admin')->whereNull('Archive')->count();
+            $leave = \Modules\Leave\Entities\Leave::whereNotNull('Admin')->whereNull('Archive')->count();
+            $work = \Modules\Fractions\Entities\Fractions::whereNotNull('Admin')->whereNull('Archive')->count();
+            $fish= \Modules\Fish\Entities\Fish::whereNull('fina')->count();
+
+        @endphp
+
+        <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <?php
+                $sum = $rule + $leave + $work+$fish;
+                ?>
+                @if(!empty($sum))
+                    <span class="label label-warning">{{$sum}}</span>
+                @endif
+            </a>
+            <ul class="dropdown-menu">
+                <?php
+                $sum = $rule + $leave + $work+$fish;
+                ?>
+                @if(!empty($sum))
+                    <li class="header">{{$sum}} اعلان جدید</li>
+                @endif
+                <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu">
+                        @can('مساعده')
+                            @if(!empty($rule))
+                                <li>
+                                    <a href="{{route('admin.module.rule.show')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$rule}} پاسخ مساعده دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+                        @can('مرخصی')
+                            @if(!empty($leave))
+                                <li>
+                                    <a href="{{route('admin.module.leave.show')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$leave}} پاسخ مرخصی دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+
+                        @can('کسر کار')
+                            @if(!empty($work))
+                                <li>
+                                    <a href="{{route('admin.module.fractions.show')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$work}} پاسخ کسر کار دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+
+                                @if(!empty($fish))
+                                    <li>
+                                        <a href="{{route('admin.module.fractions.show')}}">
+                                            <i class="fa fa-warning text-yellow"></i> {{$fish}} درخواست برای تولید تور صیدماهی دارید
+                                        </a>
+                                    </li>
+                                @endif
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
+
+    @can('ماموریت')
+        @php
+            $mission = \Modules\Mission\Entities\Mission::whereNotNull('Admin')->whereNull('Archive')->count();
+            $buy = \Modules\Buy\Entities\Buy::whereNotNull('Admin')->whereNull('Archive')->count();
+            $cage_date = \Modules\Cage\Entities\Cage::whereNotNull('buy')->whereNull('Archive')->count();
+            $fish = \Modules\Fish\Entities\Fish::whereNotNull('buy')->whereNull('Archive')->count();
+        @endphp
+
+        <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <?php
+                $sum = $mission + $buy + $cage_date + $fish;
+                ?>
+                @if(!empty($sum))
+                    <span class="label label-warning">{{$sum}}</span>
+                @endif
+            </a>
+            <ul class="dropdown-menu">
+                <?php
+                $sum = $mission + $buy + $cage_date + $fish;
+                ?>
+                @if(!empty($sum))
+                    <li class="header">{{$sum}} اعلان جدید</li>
+                @endif
+                <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu">
+                        @can('ماموریت')
+                            @if(!empty($mission))
+                                <li>
+                                    <a href="{{route('admin.module.rule.show')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$mission}} پاسخ ماموریت دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+                        @can('خرید کالا')
+                            @if(!empty($buy))
+                                <li>
+                                    <a href="{{route('admin.module.buy.list')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$buy}} پاسخ خرید کالا دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+                        @can('تور قفس')
+                            @if(!empty($cage_date))
+                                <li>
+                                    <a href="{{route('admin.module.cage.list')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$cage_date}} پاسخ تولید تور قفس
+                                        دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
+                        @can('تور صیدماهی')
+                            @if(!empty($fish))
+                                <li>
+                                    <a href="{{route('admin.module.fish.list')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$fish}} پاسخ تولید تور صیدماهی دارید
+                                    </a>
+                                </li>
+                            @endif
+                        @endcan
                     </ul>
                 </li>
             </ul>

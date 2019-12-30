@@ -27,6 +27,9 @@ class CreateFishTable extends Migration
             $table->string('strands')->nullable();
             $table->string('ring')->nullable();
             $table->string('description')->nullable();
+            $table->string('fina')->nullable();
+            $table->string('off')->nullable();
+            $table->string('final')->nullable();
             $table->string('date')->nullable();
             $table->string('buy')->nullable();
             $table->string('Archive')->nullable();

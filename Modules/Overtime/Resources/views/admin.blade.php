@@ -44,19 +44,8 @@
                                 </td>
                                 <td>{{\Morilog\Jalali\Jalalian::forge($OverTime->created_at)->format('Y/m/d')}}</td>
                                 <td>
-                                    @if (empty($OverTime->Admin))
-                                        <span class="btn btn-info">در انتظار پاسخ</span>
-                                    @elseif ($OverTime->Admin == 1)
-                                        <span class="btn btn-success">تایید شده</span>
-                                    @else
-                                        <span class="btn btn-danger">تایید نشده</span>
-                                    @endif
-
-
-                                </td>
-                                <td>
                                     <a href="{{route('admin.module.overtime.success',$OverTime->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
+                                        <img src="{{url('/icon/icons8-ok-48.png')}}"
                                              width="25" title="تایید درخواست">
                                     </a>
                                     <a href="{{route('admin.module.overtime.error',$OverTime->id)}}">

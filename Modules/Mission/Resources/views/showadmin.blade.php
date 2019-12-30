@@ -45,19 +45,10 @@
                                         <span class="btn btn-success">تایید نشده</span>
                                     @endif
                                 </td>
-                                <td>
-                                    @if(empty($Mission->Admin))
-                                        <span class="btn btn-info">در انتظار پاسخ</span>
-                                    @elseif($Mission->Admin == 1)
-                                        <span class="btn btn-success">تایید شده</span>
-                                    @else
-                                        <span class="btn btn-success">تایید نشده</span>
-                                    @endif
-                                </td>
 
                                 <td>
                                     <a href="{{route('admin.module.mission.admin.success',$Mission->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
+                                        <img src="{{url('/icon/icons8-ok-48.png')}}"
                                              width="25" title="تایید درخواست">
                                     </a>
                                     <a href="{{route('admin.module.mission.admin.error',$Mission->id)}}">

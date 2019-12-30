@@ -5,15 +5,15 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                درخواست کسر کار
+                درخواست اضافه کار
             </div>
         </div>
         <div class="portlet-body form">
             <div class="form-body">
                 <div class="form-group">
-                    <form method="post" action="{{route('admin.module.fractions.store')}}">
+                    <form method="post" action="{{route('admin.module.overtime.update')}}">
                         @csrf
-                        <input type="hidden" name="id" value="{{$user->id}}">
+                        <input type="hidden" name="id" value="{{$id->id}}">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -36,24 +36,25 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" name="history" class="form-control observer-example">
+                                        <input type="text" name="history" class="form-control"
+                                        value="{{$id->history}}">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>به مدت</label>
-                                    <input type="number" name="Term" class="form-control">
+                                    <label>از ساعت</label>
+                                    <input type="number" class="form-control" name="FromHour"
+                                    value="{{$id->FromHour}}">
                                 </div>
                             </div>
+
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>نوع</label>
-                                    <select class="form-control" name="type">
-                                        <option value="روز">روز</option>
-                                        <option value="ساعت">ساعت</option>
-                                    </select>
+                                    <label>تا ساعت</label>
+                                    <input type="number" class="form-control" name="until"
+                                    value="{{$id->until}}">
                                 </div>
                             </div>
 
@@ -61,7 +62,7 @@
                                 <div class="form-group">
                                     <label>توضیحات</label>
                                     <textarea name="description" id="mytextarea"
-                                              style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                              style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$id->description}}</textarea>
                                 </div>
                             </div>
 
@@ -69,19 +70,15 @@
                         </div>
                         <hr/>
                         <div class="form-group">
-                            <input type="submit" value="ثبت درخواست" class=" btn btn-success">
-                            <a href="{{route('admin.module.fractions.index')}}" class=" btn btn-danger">برگشت</a>
-
+                            <input type="submit" value="ثبت درخواست" class="btn btn-success">
+                            <a href="{{route('admin.module.leave.index')}}" class="btn btn-danger">برگشت</a>
                         </div>
 
                     </form>
-
 
                 </div>
             </div>
         </div>
     </div>
-
-
 
 @endsection

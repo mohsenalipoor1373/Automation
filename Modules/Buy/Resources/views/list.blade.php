@@ -37,9 +37,9 @@
                                     @elseif($Buy->Supervisor == 1)
                                         <span class="btn btn-success">تایید شده</span>
                                     @elseif($Buy->Supervisor == 3)
-                                        <span class="btn btn-success">اولویت ضروری</span>
+                                        <span class="btn btn-primary">اولویت ضروری</span>
                                     @else
-                                        <span class="btn btn-success">تایید نشده</span>
+                                        <span class="btn btn-danger">تایید نشده</span>
                                     @endif
                                 </td>
                                 <td>
@@ -48,22 +48,22 @@
                                     @elseif($Buy->Admin == 1)
                                         <span class="btn btn-success">تایید شده</span>
                                     @else
-                                        <span class="btn btn-success">تایید نشده</span>
+                                        <span class="btn btn-danger">تایید نشده</span>
                                     @endif
                                 </td>
 
                                 <td>
                                     @if(empty($Buy->Supervisor))
-                                        <a href="{{route('admin.module.mission.edit',$Buy->id)}}">
+                                        <a href="{{route('admin.module.buy.edit',$Buy->id)}}">
                                             <img src="{{url('/icon/icons8-edit-property-48.png')}}"
                                                  width="25" title="ویرایش ">
                                         </a>
-                                        <a href="{{route('admin.module.mission.delete',$Buy->id)}}">
+                                        <a href="{{route('admin.module.buy.delete',$Buy->id)}}">
                                             <img src="{{url('/icon/icons8-delete-bin-48.png')}}"
                                                  width="25" title="حذف ">
                                         </a>
                                     @else
-                                        <span class="btn btn-info">به این درخواست دسترسی ندارید</span>
+                                        <a href="{{route('admin.module.buy.save',$Buy->id)}}"><span class="btn btn-danger">بایگانی</span></a>
                                     @endif
 
                                 </td>

@@ -103,10 +103,15 @@ class LeaveController extends Controller
                     'Supervisor' => 3,
                 ]);
                 $user = User::where('id', $leave->user_id)->first();
-                \Modules\Leave\Jobs\SendSmsJob::dispatch($leave, $user);
+                try {
+                    \Modules\Leave\Jobs\SendSmsJob::dispatch($leave, $user);
+                } catch (\Exception $exception) {
+
+                }
+
             }
 
-            return ReturnMsgSuccess('درخواست مرخصی با موفقیت ارسال شد');
+            return ReturnMsgSuccess('اطلاعات درخواست مرخصی با موفقیت در سیستم ثبت شد');
         }
 
     }
@@ -122,7 +127,7 @@ class LeaveController extends Controller
     {
         $delete = $id->delete();
         if ($delete) {
-            return ReturnMsgError('اطلاعات مرخصی با موفقیت حذف شد');
+            return ReturnMsgError('اطلاعات مرخصی با موفقیت از سیستم حذف شد');
 
         }
 
@@ -164,7 +169,7 @@ class LeaveController extends Controller
             'description' => $request['description'],
         ]);
         if ($update) {
-            return ReturnMsgSuccess('درخواست مرخصی با موفقیت ویرایش شد');
+            return ReturnMsgSuccess('اطلاعات درخواست مرخصی با موفقیت ویرایش شد');
 
         }
 
@@ -297,6 +302,15 @@ class LeaveController extends Controller
 
         $Leaves = Leave::whereNotNull('Archive')->orderBy('id', 'desc')->get();
         return view('leave::make', compact('Leaves'));
+    }
+
+    public function save(Leave $id)
+    {
+        Leave::find($id->id)->update([
+            'Archive' => 1,
+        ]);
+        return ReturnMsgSuccess('اطلاعات مرخصی پرسنل با موفقیت در سیستم بایگانی شد');
+
     }
 
 }

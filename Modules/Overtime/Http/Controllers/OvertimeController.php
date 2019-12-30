@@ -5,6 +5,7 @@ namespace Modules\Overtime\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Queue\Console\RetryCommand;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Leave\Entities\Leave;
@@ -13,6 +14,7 @@ use Modules\TheRule\Entities\TheRule;
 use Morilog\Jalali\Jalalian;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
+use function App\Providers\ReturnMsgError;
 use function App\Providers\ReturnMsgInfo;
 use function App\Providers\ReturnMsgSuccess;
 
@@ -42,7 +44,7 @@ class OvertimeController extends Controller
         $input = $request->all();
         $input['user_id'] = $request['id'];
         Overtime::create($input);
-        return ReturnMsgSuccess('درخواست اضافه کار برای پرسنل با موفقیت ثبت شد');
+        return ReturnMsgSuccess('درخواست اضافه کار برای پرسنل با موفقیت در سیستم ثبت شد');
 
     }
 
@@ -110,6 +112,44 @@ class OvertimeController extends Controller
             ]);
         return ReturnMsgSuccess('درخواست ها بایگانی شدند');
 
+
+    }
+
+    public function save(Overtime $id)
+    {
+        Overtime::find($id->id)->update([
+            'Archive' => 1,
+        ]);
+        return ReturnMsgSuccess('اطلاعات اضافه کاری پرسنل با موفقیت در سیستم ثبت شد');
+
+    }
+
+    public function delete(Overtime $id)
+    {
+        $id->delete();
+        return ReturnMsgError('اطلاعات اضافه کاری پرسنل با موفقیت از سیستم حذف شد');
+    }
+
+    public function edit(Overtime $id)
+    {
+
+        $users = User::where('id', $id->user_id)->get();
+        foreach ($users as $user)
+
+            return view('overtime::edit', compact('id', 'user'));
+    }
+
+    public function update(Request $request)
+    {
+        $update = Overtime::find($request['id'])->update([
+            'history' => $request['history'],
+            'FromHour' => $request['FromHour'],
+            'until' => $request['until'],
+            'description' => $request['description'],
+        ]);
+        if ($update) {
+            return ReturnMsgSuccess('اطلاعات اضافه کاری پرسنل با موفقیت ویرایش شد');
+        }
 
     }
 

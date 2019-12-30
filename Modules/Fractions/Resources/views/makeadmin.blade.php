@@ -71,14 +71,6 @@
 
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.module.fractions.admin.true',$Fraction->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
-                                             width="25" title="تایید درخواست">
-                                    </a>
-                                    <a href="{{route('admin.module.fractions.admin.false',$Fraction->id)}}">
-                                        <img src="{{url('/icon/icons8-delete-64.png')}}"
-                                             width="25" title="مخالفت با درخواست">
-                                    </a>
                                     <a href="{{route('admin.module.fractions.supervisor.list',$Fraction->id)}}">
                                         <img src="{{url('/icon/icons8-zoom-in-64.png')}}"
                                              width="25" title="مشاهده جزییات ">

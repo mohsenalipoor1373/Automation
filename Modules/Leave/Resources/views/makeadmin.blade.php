@@ -84,14 +84,6 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{route('admin.module.leave.admin.true',$Leave->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
-                                             width="25" title="تایید درخواست">
-                                    </a>
-                                    <a href="{{route('admin.module.leave.admin.false',$Leave->id)}}">
-                                        <img src="{{url('/icon/icons8-delete-64.png')}}"
-                                             width="25" title="مخالفت با درخواست">
-                                    </a>
                                     <a href="{{route('admin.module.leave.supervisor.list',$Leave->id)}}">
                                         <img src="{{url('/icon/icons8-zoom-in-64.png')}}"
                                              width="25" title="مشاهده جزییات ">

@@ -24,4 +24,8 @@ Route::prefix('buy')->group(function () {
     Route::get('showadmin', 'BuyController@showadmin')->name('admin.module.buy.show-admin');
     Route::get('stores', 'BuyController@stores')->name('admin.module.buy.stores');
     Route::post('store', 'BuyController@store')->name('admin.module.buy.store');
+    Route::post('update', 'BuyController@update')->name('admin.module.buy.update');
+    Route::get('save/{id?}', 'BuyController@save')->name('admin.module.buy.save');
+    Route::get('edit/{id?}', 'BuyController@edit')->name('admin.module.buy.edit');
+    Route::get('delete/{id?}', 'BuyController@delete')->name('admin.module.buy.delete');
 });

@@ -81,7 +81,7 @@
                                                  width="25" title="حذف ">
                                         </a>
                                     @else
-                                        <span class="btn btn-info">به این درخواست دسترسی ندارید</span>
+                                        <a href="{{route('admin.module.fraction.save',$Fraction->id)}}"><span class="btn btn-danger">بایگانی</span></a>
 
 
                                     @endif

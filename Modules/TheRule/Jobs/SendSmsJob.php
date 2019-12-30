@@ -33,7 +33,7 @@ class SendSmsJob implements ShouldQueue
     public function handle()
     {
         $sender = "10004346";
-        $receptor = "09332286813";
+        $receptor = $this->user['phone'];
         $message = $this->user['name'] . ' درخواست مساعده ' . $this->theRule['price'] . ' هزار ریالی را دارد';
         $api = new \Kavenegar\KavenegarApi("36336C5571583354676D4749486E6A777666712F614E7A7831796C69625367746F39583757624E533565553D");
         $api->Send($sender, $receptor, $message);

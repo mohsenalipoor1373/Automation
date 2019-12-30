@@ -30,5 +30,6 @@ Route::prefix('fractions')->group(function () {
     Route::get('/delete/{id?}', 'FractionsController@delete')->name('admin.module.fraction.delete');
     Route::get('/check', 'FractionsController@check')->name('admin.module.fraction.check');
     Route::get('/edit/{id?}', 'FractionsController@edit')->name('admin.module.fraction.edit');
+    Route::get('/save/{id?}', 'FractionsController@save')->name('admin.module.fraction.save');
 
 });

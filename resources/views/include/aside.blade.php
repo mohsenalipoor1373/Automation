@@ -519,5 +519,25 @@
             </li>
         @endcan
 
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>درخواست های تولید</span>
+                <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.module.fish.makea')}}"><i class="fa fa-circle-o"></i>لیست
+                        درخواستهای
+                        تور قفس</a>
+                </li>
+                <li><a href="{{route('admin.module.fish.makes')}}"><i class="fa fa-circle-o"></i>لیست
+                        درخواستهای
+                        تور صیدماهی</a>
+                </li>
+
+            </ul>
+        </li>
+
     </ul>
 </section>

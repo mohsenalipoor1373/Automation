@@ -42,11 +42,11 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.module.buy.super.success',$Buy->id)}}">
+                                    <a href="{{route('admin.module.buy.admin.success',$Buy->id)}}">
                                         <img src="{{url('/icon/icons8-ok-48.png')}}"
                                              width="25" title="تایید درخواست">
                                     </a>
-                                    <a href="{{route('admin.module.buy.super.error',$Buy->id)}}">
+                                    <a href="{{route('admin.module.buy.admin.error',$Buy->id)}}">
                                         <img src="{{url('/icon/icons8-delete-64.png')}}"
                                              width="25" title="مخالفت با درخواست">
                                     </a>

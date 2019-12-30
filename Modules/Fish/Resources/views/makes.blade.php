@@ -28,7 +28,6 @@
                             <th>توضیحات</th>
                             <th>تاریخ درخواست</th>
                             <th>تاریخ تولید</th>
-                            <th>تولید</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -57,7 +56,6 @@
                                 <td>{{\Morilog\Jalali\Jalalian::forge($Fish->created_at)->format('Y/m/d')}}</td>
                                 <td>
 
-
                                     @if(empty($Fish->date))
                                         <span class="btn btn-info">در انتظار پاسخ</span>
                                     @else
@@ -65,34 +63,19 @@
                                     @endif
 
                                 </td>
-
                                 <td>
-                                    @if(empty($Fish->buy))
-                                        <span class="btn btn-info">در انتظار پاسخ</span>
-                                    @elseif($Fish->buy == 1)
-                                        <span class="btn btn-success">تایید شده</span>
-                                    @elseif($Fish->buy == 3)
-                                        <span class="btn btn-success">اولویت ضروری</span>
-                                    @else
-                                        <span class="btn btn-success">تایید نشده</span>
-                                    @endif
-                                </td>
-
-                                <td>
-                                    @if(!empty($Fish->buy))
-                                        <a href="{{route('admin.module.fish.save',$Fish->id)}}"><span
-                                                class="btn btn-info">بایگانی</span></a>
-
-                                    @else
-                                        <a href="{{route('admin.module.fish.edit',$Fish->id)}}">
-                                            <img src="{{url('/icon/icons8-edit-property-48.png')}}"
-                                                 width="25" title="ویرایش ">
-                                        </a>
-                                        <a href="{{route('admin.module.fish.delete',$Fish->id)}}">
-                                            <img src="{{url('/icon/icons8-delete-bin-48.png')}}"
-                                                 width="25" title="حذف ">
-                                        </a>
-                                    @endif
+                                    <a href="{{route('admin.module.fish.admin.success',$Fish->id)}}">
+                                        <img src="{{url('/icon/icons8-ok-48.png')}}"
+                                             width="25" title="تایید درخواست">
+                                    </a>
+                                    <a href="{{route('admin.module.fish.admin.error',$Fish->id)}}">
+                                        <img src="{{url('/icon/icons8-delete-64.png')}}"
+                                             width="25" title="مخالفت با درخواست">
+                                    </a>
+                                    <a href="{{route('admin.module.fish.date.show',$Fish->id)}}">
+                                        <img src="{{url('/icon/icons8-zoom-in-64.png')}}"
+                                             width="25" title="ثبت تاریخ">
+                                    </a>
 
                                 </td>
                             </tr>

@@ -35,6 +35,7 @@ class PermissionTableSeeder extends Seeder
             'خرید کالا',
             'تور قفس',
             'تور صیدماهی',
+            'درخواست های تولید',
 
 
         ];

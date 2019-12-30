@@ -73,7 +73,7 @@
 
                                 <td>
                                     <a href="{{route('admin.module.leave.admin.true',$Leave->id)}}">
-                                        <img src="{{url('/icon/icons8-ok-48 (1).png')}}"
+                                        <img src="{{url('/icon/icons8-ok-48.png')}}"
                                              width="25" title="تایید درخواست">
                                     </a>
                                     <a href="{{route('admin.module.leave.admin.false',$Leave->id)}}">

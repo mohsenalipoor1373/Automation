@@ -22,4 +22,8 @@ Route::prefix('overtime')->group(function () {
     Route::get('/error/{id?}', 'OvertimeController@error')->name('admin.module.overtime.error');
     Route::get('/check', 'OvertimeController@check')->name('admin.module.overtime.check');
     Route::post('/store', 'OvertimeController@store')->name('admin.module.overtime.store');
+    Route::get('/save/{id?}', 'OvertimeController@save')->name('admin.module.overtime.save');
+    Route::get('/edit/{id?}', 'OvertimeController@edit')->name('admin.module.overtime.edit');
+    Route::get('/delete/{id?}', 'OvertimeController@delete')->name('admin.module.overtime.delete');
+    Route::post('/update', 'OvertimeController@update')->name('admin.module.overtime.update');
 });
