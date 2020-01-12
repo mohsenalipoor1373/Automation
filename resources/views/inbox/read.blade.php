@@ -12,7 +12,8 @@
                     <h3 class="box-title">پوشه ها</h3>
 
                     <div class="box-tools">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
                         </button>
                     </div>
                 </div>
@@ -36,25 +37,36 @@
                     <h3 class="box-title">پیام</h3>
 
                     <div class="box-tools pull-right">
-                        <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Next"><i class="fa fa-chevron-right"></i></a>
-                        <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Previous"><i class="fa fa-chevron-left"></i></a>
+                        <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Next"><i
+                                class="fa fa-chevron-right"></i></a>
+                        <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Previous"><i
+                                class="fa fa-chevron-left"></i></a>
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                     <div class="mailbox-read-info">
-                        <h3>موضوع</h3>
-                        <h5>از: help@example.com
-                            <span class="mailbox-read-time pull-left">۳ مرداد ۱۳۹۶ ساعت ۱۴:۳۲</span></h5>
+                        <h3>{{$id->title}}</h3>
+                        @foreach($users as $user)
+                            @if($user->id == $id->user_id)
+                                <h5>از: {{$user->name}}
+                                    <span
+                                        class="mailbox-read-time pull-left">{{\Morilog\Jalali\Jalalian::forge($id->created_at)->ago()}}</span>
+                                </h5>
+                            @endif
+                        @endforeach
                     </div>
                     <!-- /.mailbox-read-info -->
                     <div class="mailbox-controls with-border text-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip"
+                                    data-container="body" title="Delete">
                                 <i class="fa fa-trash-o"></i></button>
-                            <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip"
+                                    data-container="body" title="Reply">
                                 <i class="fa fa-reply"></i></button>
-                            <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip"
+                                    data-container="body" title="Forward">
                                 <i class="fa fa-share"></i></button>
                         </div>
                         <!-- /.btn-group -->
@@ -63,28 +75,30 @@
                     </div>
                     <!-- /.mailbox-controls -->
                     <div class="mailbox-read-message">
-                        <p>سلام</p>
 
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
 
-                        <p>با تشکر<br>جان</p>
+                        <p>{{$id->description}}</p>
+
+
                     </div>
                     <!-- /.mailbox-read-message -->
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <ul class="mailbox-attachments clearfix">
-                        <li>
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+                        @if(!empty($id->file))
+                            <li>
+                                <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
 
-                            <div class="mailbox-attachment-info">
-                                <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Sep2014-report.pdf</a>
-                                <span class="mailbox-attachment-size">
-                          1,245 KB
+                                <div class="mailbox-attachment-info">
+                                    <span class="mailbox-attachment-size">
                           <a href="#" class="btn btn-default btn-xs pull-left"><i class="fa fa-cloud-download"></i></a>
                         </span>
-                            </div>
-                        </li>
+                                </div>
+                            </li>
+
+
+                        @endif
                     </ul>
                 </div>
             </div>

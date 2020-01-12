@@ -43,6 +43,7 @@ class HomeController extends Controller
 
     public function read(Sms $id)
     {
-        return view('inbox.read', compact('id'));
+        $users = User::all();
+        return view('inbox.read', compact('id','users'));
     }
 }

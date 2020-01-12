@@ -74,7 +74,9 @@
                                 <tbody>
                                 <tr>
                                     <td><input type="checkbox"></td>
-                                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
+                                    <td class="mailbox-star">
+                                        <a href="#"><i class="fa fa-star text-yellow"></i></a>
+                                    </td>
                                     @foreach($users as $user)
                                         @if($user->id == $sms->user_id)
                                             <td class="mailbox-name"><a
@@ -86,7 +88,7 @@
                                         {{$sms->description}}
                                     </td>
                                     <td class="mailbox-attachment"></td>
-                                    <td class="mailbox-date">5 دقیقه پیش</td>
+                                    <td class="mailbox-date">{{\Morilog\Jalali\Jalalian::forge($sms->created_at)->ago()}}</td>
                                 </tr>
                                 </tbody>
                             @endforeach
