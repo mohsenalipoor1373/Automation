@@ -531,7 +531,7 @@
                         درخواستهای
                         تور قفس</a>
                 </li>
-                <li><a href="{{route('admin.module.fish.makes')}}"><i class="fa fa-circle-o"></i>لیست
+                <li><a href="{{route('admin.module.fish.makes.m')}}"><i class="fa fa-circle-o"></i>لیست
                         درخواستهای
                         تور صیدماهی</a>
                 </li>

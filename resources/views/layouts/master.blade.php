@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        #loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url({{url('/icon/2.gif')}}) center no-repeat #fff;
+        }
+    </style>
+
     @include('include.css')
     <style>
         @font-face {
@@ -14,7 +26,11 @@
         }
     </style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="font-family: Shahab">
+
+
+<body class="hold-transition skin-blue sidebar-mini" style="font-family: Shahab"
+      onload="myFunction()">
+<div id="loader"></div>
 <div class="wrapper">
 
     <header class="main-header">
@@ -66,6 +82,13 @@
 
 
 </div>
+<script>
+    function myFunction() {
+        $(window).on("load", function () {
+            $('#loader').hide();
+        });
+    }
+</script>
 @include('include.modal')
 
 @include('include.js')

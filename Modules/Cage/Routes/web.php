@@ -23,7 +23,12 @@ Route::prefix('cage')->group(function () {
     Route::get('showadmin', 'CageController@showadmin')->name('admin.module.cage.show-admin');
     Route::get('make', 'CageController@make')->name('admin.module.cage.make-admin');
     Route::get('makeadmin', 'CageController@makeadmin')->name('admin.module.cage.makeadm');
+    Route::get('cagem', 'CageController@cagemv')->name('admin.module.cage.makes.cagem');
     Route::get('save/{id?}', 'CageController@save')->name('admin.module.buy.save');
     Route::get('edit/{id?}', 'CageController@edit')->name('admin.module.buy.edit');
     Route::get('delete/{id?}', 'CageController@delete')->name('admin.module.buy.delete');
+    Route::get('cagem/{id?}', 'CageController@cagem')->name('admin.module.buy.cagem');
+    Route::get('cagemm', 'CageController@cagemm')->name('admin.module.cage.makes.cagemm');
+    Route::get('cageoff/{id?}', 'CageController@cageoff')->name('admin.module.buy.cageoff');
+    Route::get('cageoffd/{id?}', 'CageController@cagemmd')->name('admin.module.buy.cagemm');
 });

@@ -28,7 +28,6 @@
                             <th>توضیحات</th>
                             <th>تاریخ درخواست</th>
                             <th>تاریخ تولید</th>
-                            <th>تولید</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,18 +62,6 @@
                                         <span class="btn btn-info">{{$Fish->date}}</span>
                                     @endif
 
-                                </td>
-
-                                <td>
-                                    @if(empty($Fish->buy))
-                                        <span class="btn btn-info">در انتظار پاسخ</span>
-                                    @elseif($Fish->buy == 1)
-                                        <span class="btn btn-success">تایید شده</span>
-                                    @elseif($Fish->buy == 3)
-                                        <span class="btn btn-success">اولویت ضروری</span>
-                                    @else
-                                        <span class="btn btn-success">تایید نشده</span>
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach

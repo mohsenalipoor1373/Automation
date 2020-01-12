@@ -43,7 +43,7 @@
             $work = \Modules\Fractions\Entities\Fractions::whereNull('Supervisor')->count();
             $buy = \Modules\Buy\Entities\Buy::whereNull('Supervisor')->count();
             $cage = \Modules\Cage\Entities\Cage::whereNull('buy')->count();
-            $fish= \Modules\Fish\Entities\Fish::whereNull('buy')->whereNotNull('fina')->count();
+            $fish= \Modules\Fish\Entities\Fish::whereNull('buy')->whereNotNull('off')->count();
             $mission= \Modules\Mission\Entities\Mission::whereNull('Supervisor')->count();
             $overtime = \Modules\Overtime\Entities\Overtime::whereNotNull('Admin')->whereNull('Archive')->count();
         @endphp
@@ -254,6 +254,10 @@
             $leave = \Modules\Leave\Entities\Leave::whereNotNull('Admin')->whereNull('Archive')->count();
             $work = \Modules\Fractions\Entities\Fractions::whereNotNull('Admin')->whereNull('Archive')->count();
             $fish= \Modules\Fish\Entities\Fish::whereNull('fina')->count();
+                        $cage= \Modules\Cage\Entities\Cage::whereNull('fina')->count();
+
+            $fishm= \Modules\Fish\Entities\Fish::whereNotNull('buy')->whereNull('final')->count();
+            $cagem= \Modules\Cage\Entities\Cage::whereNotNull('buy')->whereNull('final')->count();
 
         @endphp
 
@@ -261,7 +265,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
                 <?php
-                $sum = $rule + $leave + $work+$fish;
+                $sum = $rule + $leave + $work + $fish + $fishm +$cage +$cagem;
                 ?>
                 @if(!empty($sum))
                     <span class="label label-warning">{{$sum}}</span>
@@ -269,7 +273,7 @@
             </a>
             <ul class="dropdown-menu">
                 <?php
-                $sum = $rule + $leave + $work+$fish;
+                $sum = $rule + $leave + $work + $fish + $fishm +$cage +$cagem;
                 ?>
                 @if(!empty($sum))
                     <li class="header">{{$sum}} اعلان جدید</li>
@@ -306,13 +310,36 @@
                             @endif
                         @endcan
 
-                                @if(!empty($fish))
-                                    <li>
-                                        <a href="{{route('admin.module.fractions.show')}}">
-                                            <i class="fa fa-warning text-yellow"></i> {{$fish}} درخواست برای تولید تور صیدماهی دارید
-                                        </a>
-                                    </li>
-                                @endif
+                        @if(!empty($fish))
+                            <li>
+                                <a href="{{route('admin.module.fish.makes.m')}}">
+                                    <i class="fa fa-warning text-yellow"></i> {{$fish}} درخواست تور صیدماهی دارید
+                                </a>
+                            </li>
+                        @endif
+
+                        @if(!empty($fishm))
+                            <li>
+                                <a href="{{route('admin.module.fish.makes.buym')}}">
+                                    <i class="fa fa-warning text-yellow"></i> {{$fishm}}پاسخ تولید تورصیدماهی دارید
+                                </a>
+                            </li>
+                        @endif
+
+                            @if(!empty($cage))
+                                <li>
+                                    <a href="{{route('admin.module.cage.makes.cagem')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$cage}}درخواست تولید تور قفس دارید
+                                    </a>
+                                </li>
+                            @endif
+                            @if(!empty($cagem))
+                                <li>
+                                    <a href="{{route('admin.module.cage.makes.cagemm')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$cagem}}پاسخ تولید تور قفس دارید
+                                    </a>
+                                </li>
+                            @endif
                     </ul>
                 </li>
             </ul>
@@ -324,14 +351,15 @@
             $mission = \Modules\Mission\Entities\Mission::whereNotNull('Admin')->whereNull('Archive')->count();
             $buy = \Modules\Buy\Entities\Buy::whereNotNull('Admin')->whereNull('Archive')->count();
             $cage_date = \Modules\Cage\Entities\Cage::whereNotNull('buy')->whereNull('Archive')->count();
-            $fish = \Modules\Fish\Entities\Fish::whereNotNull('buy')->whereNull('Archive')->count();
+            $fisha = \Modules\Fish\Entities\Fish::whereNotNull('fina')->whereNull('off')->count();
+            $cagea = \Modules\Cage\Entities\Cage::whereNotNull('fina')->whereNull('off')->count();
         @endphp
 
         <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
                 <?php
-                $sum = $mission + $buy + $cage_date + $fish;
+                $sum = $mission + $buy + $cage_date + $fisha +$cagea;
                 ?>
                 @if(!empty($sum))
                     <span class="label label-warning">{{$sum}}</span>
@@ -339,7 +367,7 @@
             </a>
             <ul class="dropdown-menu">
                 <?php
-                $sum = $mission + $buy + $cage_date + $fish;
+                $sum = $mission + $buy + $cage_date + $fisha +$cagea;
                 ?>
                 @if(!empty($sum))
                     <li class="header">{{$sum}} اعلان جدید</li>
@@ -376,14 +404,23 @@
                             @endif
                         @endcan
                         @can('تور صیدماهی')
-                            @if(!empty($fish))
+                            @if(!empty($fisha))
                                 <li>
                                     <a href="{{route('admin.module.fish.list')}}">
-                                        <i class="fa fa-warning text-yellow"></i> {{$fish}} پاسخ تولید تور صیدماهی دارید
+                                        <i class="fa fa-warning text-yellow"></i> {{$fisha}} پاسخ مالی تور صیدماهی دارید
                                     </a>
                                 </li>
                             @endif
                         @endcan
+
+                            @if(!empty($cagea))
+                                <li>
+                                    <a href="{{route('admin.module.cage.list')}}">
+                                        <i class="fa fa-warning text-yellow"></i> {{$cagea}} پاسخ مالی تور قفس دارید
+                                    </a>
+                                </li>
+                            @endif
+
                     </ul>
                 </li>
             </ul>

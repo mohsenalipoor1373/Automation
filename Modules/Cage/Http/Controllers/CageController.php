@@ -128,5 +128,45 @@ class CageController extends Controller
         }
     }
 
+    public function cagem(Cage $id)
+    {
+        Cage::find($id->id)->update([
+            'fina' => 1,
+        ]);
+        return ReturnMsgSuccess('با درخواست تولید موافقت شد');
 
+    }
+
+
+    public function cagemv()
+    {
+        $Cages = Cage::whereNull('fina')->get();
+        return view('cage::cagem', compact('Cages'));
+
+    }
+
+    public function cageoff(Cage $id)
+    {
+        Cage::find($id->id)->update([
+            'off' => 1,
+        ]);
+        return ReturnMsgSuccess('درخواست برای تولید ارسال شد');
+
+    }
+
+    public function cagemm()
+    {
+        $Cages = Cage::whereNull('final')->whereNotNull('buy')->get();
+        return view('cage::cagemm', compact('Cages'));
+
+    }
+
+    public function cagemmd(Cage $id)
+    {
+        Cage::find($id->id)->update([
+            'final' => 1,
+        ]);
+        return ReturnMsgSuccess('درخواست تپلید تور قفس تایید شد');
+
+    }
 }

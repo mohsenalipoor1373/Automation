@@ -26,8 +26,6 @@
                             <th>دوبل</th>
                             <th>توضیحات</th>
                             <th>تاریخ درخواست</th>
-                            <th>تاریخ تولید</th>
-                            <th>مالی</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -53,45 +51,13 @@
                                     @endif
                                 </td>
                                 <td>{{\Morilog\Jalali\Jalalian::forge($Cage->created_at)->format('Y/m/d')}}</td>
-                                <td>
 
-
-                                    @if(empty($Cage->date))
-                                        <span class="btn btn-info">در انتظار پاسخ</span>
-                                    @else
-                                        <span class="btn btn-info">{{$Cage->date}}</span>
-                                    @endif
-
-                                </td>
 
                                 <td>
-                                    @if(empty($Cage->final))
-                                        <span class="btn btn-info">در انتظار پاسخ</span>
-                                    @elseif($Cage->final == 1)
-                                        <span class="btn btn-success">تایید شده</span>
-                                    @else
-                                        <span class="btn btn-success">تایید نشده</span>
-                                    @endif
-                                </td>
+                                    @if($Cage->fina == null)
+                                        <a href="{{route('admin.module.buy.cagem',$Cage->id)}}"><span
+                                                class="btn btn-info">تایید</span></a>
 
-                                <td>
-                                    @if($Cage->off == null and $Cage->fina != null)
-                                        <a href="{{route('admin.module.buy.cageoff',$Cage->id)}}"><span
-                                                class="btn btn-info">ارسال به تولید</span></a>
-
-                                    @elseif($Cage->final != null and $Cage->Archive == null)
-
-                                        <a href="{{route('admin.module.buy.save',$Cage->id)}}"><span
-                                                class="btn btn-info">بایگانی</span></a>
-                                    @else
-                                        <a href="{{route('admin.module.buy.edit',$Cage->id)}}">
-                                            <img src="{{url('/icon/icons8-edit-property-48.png')}}"
-                                                 width="25" title="ویرایش ">
-                                        </a>
-                                        <a href="{{route('admin.module.buy.delete',$Cage->id)}}">
-                                            <img src="{{url('/icon/icons8-delete-bin-48.png')}}"
-                                                 width="25" title="حذف ">
-                                        </a>
                                     @endif
 
                                 </td>

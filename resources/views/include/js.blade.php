@@ -209,3 +209,4 @@
 <script src="{{asset('/assets/pages/scripts/table-datatables-colreorder.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('/assets/sweetalert.js')}}"></script>
+

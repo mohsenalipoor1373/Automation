@@ -27,4 +27,13 @@ Route::prefix('fish')->group(function () {
     Route::get('save/{id?}', 'FishController@save')->name('admin.module.fish.save');
     Route::get('edit/{id?}', 'FishController@edit')->name('admin.module.fish.edit');
     Route::get('delete/{id?}', 'FishController@delete')->name('admin.module.fish.delete');
+
+    Route::get('m/success/{id?}', 'FishController@msuccess')->name('admin.module.fishm.admin.success');
+    Route::get('makes/m', 'FishController@mmakes')->name('admin.module.fish.makes.m');
+    Route::get('off/{id?}', 'FishController@off')->name('admin.module.fish.off');
+    Route::get('buym', 'FishController@buym')->name('admin.module.fish.makes.buym');
+    Route::get('buysuccess/{id?}', 'FishController@buysuccess')->name('admin.module.fishm.admin.buysuccess');
+
+
+
 });

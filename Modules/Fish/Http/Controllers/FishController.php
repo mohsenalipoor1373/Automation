@@ -52,7 +52,6 @@ class FishController extends Controller
     }
 
 
-
     public function makes()
     {
         $Fishs = Fish::whereNull('fina')->get();
@@ -61,6 +60,21 @@ class FishController extends Controller
 
     }
 
+    public function mmakes()
+    {
+        $Fishs = Fish::whereNull('fina')->get();
+
+        return view('fish::fishm', compact('Fishs'));
+
+    }
+
+    public function buym()
+    {
+        $Fishs = Fish::whereNotNull('buy')->where('final')->get();
+
+        return view('fish::buym', compact('Fishs'));
+
+    }
 
     public function datestore(Request $request)
     {
@@ -97,6 +111,18 @@ class FishController extends Controller
 
     }
 
+    public function msuccess(Fish $id)
+    {
+        $cages = Fish::where('id', $id->id)->get();
+        foreach ($cages as $cage)
+            Fish::find($cage->id)->update([
+                'fina' => 1,
+            ]);
+        return ReturnMsgSuccess('با درخواست تولید تور صیدماهی موافقت شد');
+
+    }
+
+
     public function error(Fish $id)
     {
         $cages = Fish::where('id', $id->id)->get();
@@ -116,6 +142,7 @@ class FishController extends Controller
         return ReturnMsgSuccess('اطلاعات تورصیدماهی با موفقیت در سیستم بایگانی شد');
 
     }
+
     public function edit(Fish $id)
     {
         return view('fish::edit', compact('id'));
@@ -128,6 +155,7 @@ class FishController extends Controller
         return ReturnMsgError('اطلاعات تولید تورصیدماهی با موفقیت از سیستم حذف شد');
 
     }
+
     public function update(Request $request)
     {
         $update = Fish::find($request['id'])->update($request->all());
@@ -136,5 +164,22 @@ class FishController extends Controller
         }
     }
 
+    public function off(Fish $id)
+    {
 
+        Fish::find($id->id)->update([
+            'off' => 1,
+        ]);
+        return ReturnMsgSuccess('درخواست برای تولید ارسال شد');
+
+    }
+
+    public function buysuccess(Fish $id)
+    {
+        Fish::find($id->id)->update([
+            'final' => 1,
+        ]);
+        return ReturnMsgSuccess('با درخواست تولید موافقت شد');
+
+    }
 }
