@@ -539,5 +539,17 @@
             </ul>
         </li>
 
+
+
+        <li class="active">
+
+            <a href="{{route('inbox')}}">
+                <i class="fa fa-inbox"></i> <span>پیام ها</span>
+                <span class="pull-left-container">
+            </span>
+            </a>
+        </li>
+
+
     </ul>
 </section>

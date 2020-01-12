@@ -21,6 +21,12 @@ Route::get('/test', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/inbox', 'HomeController@inbox')->name('inbox')->middleware('auth');
+Route::get('/send', 'HomeController@send')->name('send')->middleware('auth');
+Route::get('/read/{id?}', 'HomeController@read')->name('read')->middleware('auth');
+
+Route::post('/sms/store', 'SmsController@store')->name('admin.sms.store')->middleware('auth');
+
 Route::get('/users/wizard/{id?}', 'UserController@wizard')->name('admin.users.wizard');
 Route::get('/profile', 'UserController@profile')->name('profile');
 Route::post('/profile/edit', 'UserController@EditProfile')->name('edit.profile');
