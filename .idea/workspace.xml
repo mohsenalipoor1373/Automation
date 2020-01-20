@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b9b6de38-5a8e-40ff-ab14-b9794378e5d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/inbox/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inbox/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/inbox/read.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inbox/read.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/include/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/include/aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,11 +138,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\Automation\resources\views\inbox" />
-      <recent name="C:\xampp\htdocs\Automation" />
-      <recent name="$PROJECT_DIR$/public/icon" />
-      <recent name="$PROJECT_DIR$/Modules/Cage/Resources/views" />
-      <recent name="$PROJECT_DIR$/Modules/Fish/Resources/views" />
+      <recent name="C:\xampp\htdocs\Automation\resources\views\Sell" />
+      <recent name="C:\xampp\htdocs\Automation\public\icon" />
+      <recent name="C:\xampp\htdocs\Automation\public\js" />
+      <recent name="C:\xampp\htdocs\Automation\resources\views\store" />
+      <recent name="C:\xampp\htdocs\Automation\resources\views\store\exitstore" />
     </key>
   </component>
   <component name="RunManager">
@@ -232,6 +231,9 @@
       <workItem from="1578558541568" duration="810000" />
       <workItem from="1578601765110" duration="3497000" />
       <workItem from="1578812852776" duration="14107000" />
+      <workItem from="1578892170887" duration="5893000" />
+      <workItem from="1578977956320" duration="1529000" />
+      <workItem from="1579492609495" duration="22155000" />
     </task>
     <servers />
   </component>
@@ -244,28 +246,30 @@
     </state>
     <state x="406" y="202" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.860@0.0.1440.860" timestamp="1578813391737" />
     <state x="385" y="201" width="586" height="390" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.741@0.27.1366.741" timestamp="1577449785182" />
-    <state x="416" y="154" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1577452496685">
-      <screen x="0" y="27" width="1366" height="741" />
-    </state>
-    <state x="416" y="154" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1366.741@0.27.1366.741" timestamp="1577452496685" />
-    <state x="491" y="147" width="424" height="484" key="FileChooserDialogImpl" timestamp="1578830468941">
+    <state x="439" y="147" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579518777440">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="491" y="147" key="FileChooserDialogImpl/0.0.1440.860@0.0.1440.860" timestamp="1578830468941" />
-    <state x="466" y="154" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1578731601439" />
-    <state x="341" y="210" width="673" height="373" key="NewPhpClassDialog" timestamp="1575409855399">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state x="439" y="147" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.860@0.0.1440.860" timestamp="1579518777440" />
+    <state x="416" y="154" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1366.741@0.27.1366.741" timestamp="1577452496685" />
+    <state x="491" y="147" width="424" height="484" key="FileChooserDialogImpl" timestamp="1579526341427">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
+    <state x="491" y="147" key="FileChooserDialogImpl/0.0.1440.860@0.0.1440.860" timestamp="1579526341427" />
+    <state x="466" y="154" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1578731601439" />
+    <state x="359" y="212" width="673" height="373" key="NewPhpClassDialog" timestamp="1579508569065">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="359" y="212" key="NewPhpClassDialog/0.0.1440.860@0.0.1440.860" timestamp="1579508569065" />
     <state x="341" y="210" width="673" height="373" key="NewPhpClassDialog/0.27.1366.741@0.27.1366.741" timestamp="1575409855399" />
     <state x="366" y="172" width="709" height="786" key="run.anything.popup" timestamp="1578819563108">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="366" y="172" width="709" height="786" key="run.anything.popup/0.0.1440.860@0.0.1440.860" timestamp="1578819563108" />
     <state x="347" y="175" width="672" height="677" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1576776075546" />
-    <state x="366" y="17" width="707" height="785" key="search.everywhere.popup" timestamp="1578826013202">
+    <state x="366" y="17" width="707" height="785" key="search.everywhere.popup" timestamp="1579523526201">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="366" y="17" width="707" height="785" key="search.everywhere.popup/0.0.1440.860@0.0.1440.860" timestamp="1578826013202" />
+    <state x="366" y="17" width="707" height="785" key="search.everywhere.popup/0.0.1440.860@0.0.1440.860" timestamp="1579523526201" />
     <state x="347" y="42" width="670" height="676" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1578489781935" />
   </component>
 </project>

@@ -541,7 +541,7 @@
 
 
 
-        <li class="active">
+        <li class="">
 
             <a href="{{route('inbox')}}">
                 <i class="fa fa-inbox"></i> <span>پیام ها</span>
@@ -549,6 +549,93 @@
             </span>
             </a>
         </li>
+
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>خروج کالا از انبار</span>
+                <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.store.index')}}"><i class="fa fa-circle-o"></i>
+                        ثبت کالا
+                       </a>
+                </li>
+                <li><a href="{{route('admin.store.list')}}"><i class="fa fa-circle-o"></i>
+                        بایگانی خروجی ها
+                        </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>حواله انبار</span>
+                <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.Remittances.list')}}"><i class="fa fa-circle-o"></i>
+                        ثبت حواله
+                    </a>
+                </li>
+                <li><a href="{{route('admin.store.list')}}"><i class="fa fa-circle-o"></i>
+                        بایگانی حواله ها
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>رسید کالا به انبار</span>
+                <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.Goods.index')}}"><i class="fa fa-circle-o"></i>
+                        ثبت رسید کالا
+                    </a>
+                </li>
+                <li><a href="{{route('admin.Goods.list')}}"><i class="fa fa-circle-o"></i>
+                        بایگانی رسیدهای کالا
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>فروش</span>
+                <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.sell.index')}}"><i class="fa fa-circle-o"></i>
+                        ثبت فروش
+                    </a>
+                </li>
+                <li><a href="{{route('admin.sell.list')}}"><i class="fa fa-circle-o"></i>
+                        بایگانی فروش ها
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
 
 
     </ul>

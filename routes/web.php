@@ -44,3 +44,30 @@ Route::get('/roles/wizard', 'RoleController@wizard')->name('admin.roles.wizard')
 Route::post('/roles/store', 'RoleController@store')->name('admin.roles.store');
 Route::get('/lock', 'RoleController@lock')->name('admin.lock');
 Route::post('/check/lock', 'RoleController@checklock')->name('admin.check.lock')->middleware('auth');
+
+
+
+Route::get('/store/index', 'StoreController@index')->name('admin.store.index')->middleware('auth');
+Route::get('/store/list', 'StoreController@list')->name('admin.store.list')->middleware('auth');
+Route::post('/store/store', 'StoreController@store')->name('admin.store.store')->middleware('auth');
+
+
+Route::get('/Remittances/index', 'RemittancesController@index')->name('admin.Remittances.list')->middleware('auth');
+
+
+Route::get('/Goods/index', 'GoodsController@index')->name('admin.Goods.index')->middleware('auth');
+Route::get('/Goods/list', 'GoodsController@list')->name('admin.Goods.list')->middleware('auth');
+Route::post('/Goods/store', 'GoodsController@store')->name('admin.Goods.store')->middleware('auth');
+
+
+Route::get('/sell/index', 'SellController@index')->name('admin.sell.index')->middleware('auth');
+Route::get('/sell/list', 'SellController@list')->name('admin.sell.list')->middleware('auth');
+Route::get('/sell/view/{id?}', 'SellController@view')->name('admin.sell.view')->middleware('auth');
+Route::get('/sell/edit/{id?}', 'SellController@edit')->name('admin.sell.edit')->middleware('auth');
+Route::get('/sell/delete/{id?}', 'SellController@delete')->name('admin.sell.delete')->middleware('auth');
+
+
+Route::post('/sell/store', 'SellController@store')->name('admin.sell.store')->middleware('auth');
+Route::post('/sell/update', 'SellController@update')->name('admin.sell.update')->middleware('auth');
+
+
